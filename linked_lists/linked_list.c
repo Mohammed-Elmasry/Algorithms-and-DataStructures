@@ -7,14 +7,15 @@ struct node {
 };
 
 //prototypes
-void printList(struct node** head);
-int append(struct node** head, char value);
 struct node * delete(struct node** head, char value);
+void printList(struct node** head);
 void reverse(struct node ** head);
+void destroyList(struct node** head);
+int append(struct node** head, char value);
 int insertAt(struct node** head, int index, char value);
 int find(struct node** const head, char value);
 int add(struct node** head, char value);
-void destroyList(struct node** head);
+int orderedInsert(struct node ** head, char value);
 
 int main(void){
 
@@ -23,11 +24,8 @@ int main(void){
 	append(&pHead, 'D');
 	append(&pHead, 'H');
 	insertAt(&pHead, 3, 'S');
-	insertAt(&pHead, 0, 'Z');
-	insertAt(&pHead, 0, 'L');
-	reverse(&pHead);
-	add(&pHead, 'V');
-	destroyList(&pHead);
+	orderedInsert(&pHead, 'A');
+	orderedInsert(&pHead, 'B');
 	printList(&pHead);
 	return 0;
 }
@@ -162,4 +160,31 @@ void destroyList(struct node** head){
 		free(ptr);
 		ptr = *head; 
 	}
+}
+
+int orderedInsert(struct node ** head, char value){
+	int retval = 0;
+	struct node * ptrNew = (struct node *)malloc(sizeof(struct node));
+	if(ptrNew){
+		ptrNew->data = value;
+	 	ptrNew->pNext = NULL;
+		struct node* ptrPrev = NULL;
+		struct node* ptrCurrent = *head; //pointing to first node
+		while(ptrCurrent->pNext != NULL && ptrCurrent->data < value){
+			ptrPrev = ptrCurrent;
+			ptrCurrent = ptrCurrent->pNext;
+		}
+		if(ptrPrev != NULL){
+			ptrNew->pNext = ptrCurrent;
+			ptrPrev->pNext = ptrNew;
+		} else {
+			ptrNew->pNext = ptrCurrent;
+			*head = ptrNew;
+		}
+		retval = 1;
+	} else {
+		printf("%c not inserted, memory allocation failed", value);
+	}
+
+	return retval;
 }
