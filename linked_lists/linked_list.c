@@ -20,12 +20,15 @@ int orderedInsert(struct node ** head, char value);
 int main(void){
 
 	struct node * pHead = NULL;
-	append(&pHead, 'C');
-	append(&pHead, 'D');
-	append(&pHead, 'H');
-	insertAt(&pHead, 3, 'S');
-	orderedInsert(&pHead, 'A');
+	struct node node1;
+	pHead = &node1;
+	node1.data = 'A';
+	node1.pNext = NULL;
+	orderedInsert(&pHead, 'C');
 	orderedInsert(&pHead, 'B');
+	orderedInsert(&pHead, 'Z');
+	orderedInsert(&pHead, 'N');
+	orderedInsert(&pHead, 'L');	
 	printList(&pHead);
 	return 0;
 }
@@ -170,7 +173,7 @@ int orderedInsert(struct node ** head, char value){
 	 	ptrNew->pNext = NULL;
 		struct node* ptrPrev = NULL;
 		struct node* ptrCurrent = *head; //pointing to first node
-		while(ptrCurrent->pNext != NULL && ptrCurrent->data < value){
+		while(ptrCurrent != NULL && ptrCurrent->data < value){
 			ptrPrev = ptrCurrent;
 			ptrCurrent = ptrCurrent->pNext;
 		}
