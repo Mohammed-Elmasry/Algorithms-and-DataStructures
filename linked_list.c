@@ -6,6 +6,9 @@ struct node {
 	struct node * pNext;
 };
 
+//prototypes
+void printList(struct node* head);
+
 int main(void){
 	struct node node1, node2;
 	node1.data = 'C';
