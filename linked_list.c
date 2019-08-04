@@ -28,12 +28,17 @@ int orderedInsert(struct node* head, char value){
 				ptrLeft = ptrCounter;
 				ptrCounter = ptrCounter->pNext;
 			}
+			if(ptrLeft == NULL && value < ptrCounter->data){ //still first element
+				ptrNew->pNext = head;
+				head = ptrNew;
+			}
+			ptrNew->pNext = ptrLeft->pNext;
+			ptrLeft->pNext = ptrNew;
 		}	
 	} else {
 		puts("memory allocation failed");
 		retval = 0;
 	}
 	
-
 	return retval;
 }
