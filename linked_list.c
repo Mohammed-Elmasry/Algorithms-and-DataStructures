@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 struct node {
 	char data;
 	struct node * pNext;
 };
 
 int main(void){
-
+	
 	return 0;
 }
 
@@ -41,4 +40,11 @@ int orderedInsert(struct node* head, char value){
 	}
 	
 	return retval;
+}
+
+void printList(struct node* head){
+	struct node * ptr;
+	while(ptr->pNext != NULL){
+		printf("%c -->", ptr->data);
+	}
 }
