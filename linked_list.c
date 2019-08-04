@@ -7,7 +7,14 @@ struct node {
 };
 
 int main(void){
-	
+	struct node node1, node2;
+	node1.data = 'C';
+	node2.data = 'H';
+	node2.pNext = NULL;
+	node1.pNext = node2;
+	struct node *Head = NULL;
+	Head = &node1;
+	printList(Head);
 	return 0;
 }
 
@@ -44,6 +51,7 @@ int orderedInsert(struct node* head, char value){
 
 void printList(struct node* head){
 	struct node * ptr;
+	ptr = head;
 	while(ptr->pNext != NULL){
 		printf("%c -->", ptr->data);
 	}
