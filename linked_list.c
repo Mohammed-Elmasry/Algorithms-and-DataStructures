@@ -8,6 +8,7 @@ struct node {
 
 //prototypes
 void printList(struct node* head);
+int orderedInsert(struct node* head, char value);
 
 int main(void){
 	struct node node1, node2;
