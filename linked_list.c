@@ -11,6 +11,7 @@ void printList(struct node** head);
 int append(struct node** head, char value);
 struct node * delete(struct node** head, char value);
 void reverse(struct node ** head);
+int insertAt(struct node** head, int index, char value);
 
 int main(void){
 
@@ -18,7 +19,7 @@ int main(void){
 	append(&pHead, 'C');
 	append(&pHead, 'D');
 	append(&pHead, 'H');
-	reverse(&pHead);
+	insertAt(&pHead, 3, 'S');
 	printList(&pHead);
 	return 0;
 }
@@ -87,3 +88,24 @@ void reverse(struct node ** head){
 	}
 	*head = ptrPrev;
 }
+
+int insertAt(struct node** head, int index, char value){
+	int retval = 0;
+	struct node* ptrNew=(struct node*)malloc(sizeof(struct node));
+	if(ptrNew){
+		ptrNew->data = value;
+		struct node* ptr = *head;
+		int i = 1;
+		while(i < index - 1 && ptr->pNext != NULL){
+			i++;
+			ptr = ptr->pNext;
+		}
+		ptrNew->pNext = ptr->pNext;
+		ptr->pNext = ptrNew;
+		retval = 1;
+	} else {
+		printf("%c not inserted, memory allocation failed\n", value);
+	}
+	
+	return retval;
+}	
