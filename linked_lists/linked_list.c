@@ -13,6 +13,7 @@ struct node * delete(struct node** head, char value);
 void reverse(struct node ** head);
 int insertAt(struct node** head, int index, char value);
 int find(struct node** const head, char value);
+int add(struct node** head, char value);
 
 int main(void){
 
@@ -24,6 +25,7 @@ int main(void){
 	insertAt(&pHead, 0, 'Z');
 	insertAt(&pHead, 0, 'L');
 	reverse(&pHead);
+	add(&pHead, 'V');
 	printList(&pHead);
 	return 0;
 }
@@ -138,5 +140,16 @@ int find(struct node** const head, char value){
 }
 
 
-
+int add(struct node** head, char value){
+	int retval = 0;
+	struct node * ptr = (struct node*)malloc(sizeof(struct node));
+	if(ptr){
+		ptr->data = value;
+		ptr->pNext = *head;
+		*head = ptr;
+	} else {
+		printf("%c not inserted, memory allocation failed", value);
+	}
+	return retval;
+}
 
