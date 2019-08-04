@@ -10,12 +10,15 @@ struct node {
 void printList(struct node** head);
 int append(struct node** head, char value);
 struct node * delete(struct node** head, char value);
+void reverse(struct node ** head);
 
 int main(void){
 
 	struct node * pHead = NULL;
 	append(&pHead, 'C');
 	append(&pHead, 'D');
+	append(&pHead, 'H');
+	reverse(&pHead);
 	printList(&pHead);
 	return 0;
 }
@@ -61,10 +64,26 @@ void printList(struct node** head){
 
 struct node * delete(struct node** head, char value){
 	struct node* temp;
+	struct node* ptrPrev = NULL;
 	temp = *head;
 	while(temp->data != value){
+		ptrPrev = temp;
 		temp = temp->pNext;
 	}
-
+	ptrPrev->pNext = temp->pNext;
 	return temp;
+}
+
+void reverse(struct node ** head){
+	struct node* ptrCurrent = *head;
+	struct node* ptrPrev = NULL;
+	struct node* ptrNext = NULL;
+
+	while(ptrCurrent != NULL){
+		ptrNext = ptrCurrent->pNext;
+		ptrCurrent->pNext = ptrPrev;
+		ptrPrev = ptrCurrent;
+		ptrCurrent = ptrNext;
+	}
+	*head = ptrPrev;
 }
