@@ -11,13 +11,8 @@ void printList(struct node* head);
 int orderedInsert(struct node* head, char value);
 
 int main(void){
-	struct node node1, node2;
-	node1.data = 'C';
-	node2.data = 'H';
-	node2.pNext = NULL;
-	node1.pNext = &node2;
 	struct node *Head = NULL;
-	Head = &node1;
+	orderedInsert(Head, 'C');
 	printList(Head);
 	return 0;
 }
@@ -28,22 +23,22 @@ int orderedInsert(struct node* head, char value){
 	if(ptrNew){
 		ptrNew->data = value;
 		ptrNew->pNext = NULL;
-		if(head == NULL){ //if list empty 
+		
+		struct node* ptrCounter = head;
+		struct node* ptrLeft = NULL;
+		
+		while(ptrCounter != NULL && value > ptrCounter->data){
+			ptrLeft = ptrCounter;
+			ptrCounter = ptrCounter->pNext;
+		}
+		if(ptrLeft == NULL ){ //still first element
+			ptrNew->pNext = head;
 			head = ptrNew;
-			retval = 1;
-		} else { //if list not empty
-			struct node* ptrCounter = head;
-			struct node* ptrLeft = NULL;
-			while(ptrCounter->pNext != NULL && value > ptrCounter->data){
-				ptrLeft = ptrCounter;
-				ptrCounter = ptrCounter->pNext;
-			}
-			if(ptrLeft == NULL && value < ptrCounter->data){ //still first element
-				ptrNew->pNext = head;
-				head = ptrNew;
-			}
-			ptrNew->pNext = ptrLeft->pNext;
+		} else {
 			ptrLeft->pNext = ptrNew;
+			ptrNew->pNext = ptrCounter;	
+		}
+		retval = 1;
 		}	
 	} else {
 		puts("memory allocation failed");
