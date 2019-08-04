@@ -21,11 +21,9 @@ int main(void){
 	append(&pHead, 'D');
 	append(&pHead, 'H');
 	insertAt(&pHead, 3, 'S');
-	int found = find(&pHead, 'A');
-	printf("%d\n", found);
-	append(&pHead, 'A');
-	found = find(&pHead, 'A');
-	printf("%d\n", found);
+	insertAt(&pHead, 0, 'Z');
+	insertAt(&pHead, 0, 'L');
+	reverse(&pHead);
 	printList(&pHead);
 	return 0;
 }
@@ -101,13 +99,20 @@ int insertAt(struct node** head, int index, char value){
 	if(ptrNew){
 		ptrNew->data = value;
 		struct node* ptr = *head;
+		struct node* ptrPrev = NULL;
 		int i = 1;
 		while(i < index - 1 && ptr->pNext != NULL){
 			i++;
+			ptrPrev = ptr;
 			ptr = ptr->pNext;
 		}
-		ptrNew->pNext = ptr->pNext;
-		ptr->pNext = ptrNew;
+		if(ptrPrev != NULL){
+			ptrNew->pNext = ptr->pNext;
+			ptr->pNext = ptrNew;	
+		} else {
+			ptrNew->pNext = *head;
+			*head = ptrNew;
+		}
 		retval = 1;
 	} else {
 		printf("%c not inserted, memory allocation failed\n", value);
