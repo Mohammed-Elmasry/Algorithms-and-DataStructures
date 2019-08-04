@@ -12,6 +12,7 @@ int append(struct node** head, char value);
 struct node * delete(struct node** head, char value);
 void reverse(struct node ** head);
 int insertAt(struct node** head, int index, char value);
+int find(struct node** const head, char value);
 
 int main(void){
 
@@ -20,6 +21,11 @@ int main(void){
 	append(&pHead, 'D');
 	append(&pHead, 'H');
 	insertAt(&pHead, 3, 'S');
+	int found = find(&pHead, 'A');
+	printf("%d\n", found);
+	append(&pHead, 'A');
+	found = find(&pHead, 'A');
+	printf("%d\n", found);
 	printList(&pHead);
 	return 0;
 }
@@ -110,7 +116,7 @@ int insertAt(struct node** head, int index, char value){
 	return retval;
 }	
 
-int find(struct node** head, char value){
+int find(struct node** const head, char value){
 	int retval = -1;
 	int i = 0;
 	struct node* ptr = *head;
