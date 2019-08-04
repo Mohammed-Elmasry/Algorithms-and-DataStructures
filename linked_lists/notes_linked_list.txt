@@ -2,3 +2,10 @@ some notes on construction of linked lists.
 
 
 #1 don't forget to assign the members to default values (null / data member value) just after construction.
+
+#2insertion at the beginning of a linked list is O(1) and would be O(n) otherwise (you don't need to find where to insert in the first case but that's not true otherwise).
+
+#3 searching by a loop while the current pointer != null is O(n) as well because I don't know when I will find that cell I'm looking for.
+
+#4 if you want 1 pointer in your code and you want it to loop on a linked list and after the loop exists, it would be standing at the end of the linked list, then check if the NEXT of that pointer is not null.
+

@@ -14,6 +14,7 @@ void reverse(struct node ** head);
 int insertAt(struct node** head, int index, char value);
 int find(struct node** const head, char value);
 int add(struct node** head, char value);
+void destroyList(struct node** head);
 
 int main(void){
 
@@ -26,6 +27,7 @@ int main(void){
 	insertAt(&pHead, 0, 'L');
 	reverse(&pHead);
 	add(&pHead, 'V');
+	destroyList(&pHead);
 	printList(&pHead);
 	return 0;
 }
@@ -153,3 +155,11 @@ int add(struct node** head, char value){
 	return retval;
 }
 
+void destroyList(struct node** head){
+	struct node* ptr = *head;
+	while(ptr != NULL){
+		*head = ptr->pNext;
+		free(ptr);
+		ptr = *head; 
+	}
+}
