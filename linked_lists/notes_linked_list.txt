@@ -1,0 +1,4 @@
+some notes on construction of linked lists.
+
+
+#1 don't forget to assign the members to default values (null / data member value) just after construction.

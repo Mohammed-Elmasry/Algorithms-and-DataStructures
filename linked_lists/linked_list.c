@@ -109,3 +109,23 @@ int insertAt(struct node** head, int index, char value){
 	
 	return retval;
 }	
+
+int find(struct node** head, char value){
+	int retval = -1;
+	int i = 0;
+	struct node* ptr = *head;
+	struct node* ptrFound = NULL;
+	while(ptr != NULL){
+		if(ptr->data == value){
+			return i;
+		}
+		ptr = ptr->pNext;
+		i++;
+	}
+	
+	return retval;
+}
+
+
+
+
