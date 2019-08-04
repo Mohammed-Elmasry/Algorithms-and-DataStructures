@@ -7,54 +7,64 @@ struct node {
 };
 
 //prototypes
-void printList(struct node* head);
-int orderedInsert(struct node* head, char value);
+void printList(struct node** head);
+int append(struct node** head, char value);
+struct node * delete(struct node** head, char value);
 
 int main(void){
-	struct node *Head = NULL;
-	orderedInsert(Head, 'C');
-	printList(Head);
+
+	struct node * pHead = NULL;
+	append(&pHead, 'C');
+	append(&pHead, 'D');
+	printList(&pHead);
 	return 0;
 }
 
-int orderedInsert(struct node* head, char value){
+int append(struct node** head, char value){
 	int retval = 0;
 	struct node* ptrNew = (struct node*) malloc(sizeof(struct node));
-	if(ptrNew){
+	if(ptrNew != NULL){
 		ptrNew->data = value;
 		ptrNew->pNext = NULL;
-		
-		struct node* ptrCounter = head;
-		struct node* ptrLeft = NULL;
-		
-		while(ptrCounter != NULL && value > ptrCounter->data){
-			ptrLeft = ptrCounter;
-			ptrCounter = ptrCounter->pNext;
+
+		struct node* ptrCurrent = *head;
+		struct node* ptrPrev = NULL;
+		while(ptrCurrent != NULL){
+			ptrPrev = ptrCurrent;
+			ptrCurrent = ptrCurrent->pNext;
 		}
-		if(ptrLeft == NULL ){ //still first element
-			ptrNew->pNext = head;
-			head = ptrNew;
+		if(ptrPrev == NULL){
+			*head = ptrNew;
 		} else {
-			ptrLeft->pNext = ptrNew;
-			ptrNew->pNext = ptrCounter;	
+			ptrPrev->pNext = ptrNew;
 		}
 		retval = 1;
-		}	
 	} else {
-		puts("memory allocation failed");
+		printf("%c not inserted, memory allocation failed!", value);
 		retval = 0;
 	}
-	
+
 	return retval;
 }
 
-void printList(struct node* head){
+
+void printList(struct node** head){
 	struct node * ptr;
-	ptr = head;
+	ptr = *head;
 	while(ptr != NULL){
 		printf("%c --> ", ptr->data);
 		ptr = ptr->pNext;
 	}
 	printf(" NULL");
 	printf("\n");
+}
+
+struct node * delete(struct node** head, char value){
+	struct node* temp;
+	temp = *head;
+	while(temp->data != value){
+		temp = temp->pNext;
+	}
+
+	return temp;
 }
