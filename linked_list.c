@@ -55,7 +55,10 @@ int orderedInsert(struct node* head, char value){
 void printList(struct node* head){
 	struct node * ptr;
 	ptr = head;
-	while(ptr->pNext != NULL){
-		printf("%c -->", ptr->data);
+	while(ptr != NULL){
+		printf("%c --> ", ptr->data);
+		ptr = ptr->pNext;
 	}
+	printf(" NULL");
+	printf("\n");
 }
