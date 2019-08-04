@@ -11,7 +11,7 @@ int main(void){
 	node1.data = 'C';
 	node2.data = 'H';
 	node2.pNext = NULL;
-	node1.pNext = node2;
+	node1.pNext = &node2;
 	struct node *Head = NULL;
 	Head = &node1;
 	printList(Head);
