@@ -28,3 +28,22 @@ int push(struct node** top, int value){
 	}
 	return retval;
 }
+
+
+void printStack(struct node* top){
+	if (top == NULL){
+		puts("The stack is empty!");
+	} else {
+		puts("The stack is: ");
+		while(top != NULL){
+			printf("%d -->", top->data);
+			top = top->pNext;
+		}	
+		printf("NULL\n");
+	}
+	
+}
+
+
+
+
