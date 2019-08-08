@@ -15,6 +15,8 @@ int main(void){
 	struct node *pHead = NULL;
 	struct node *pTail = NULL;
 	enqueue(&pHead, &pTail, 'C');
+	enqueue(&pHead, &pTail, 'D');
+	printQueue(&pHead);
 	return 0;
 }
 
@@ -52,14 +54,15 @@ int enqueue(struct node** head, struct node** tail, char value){
 // }
 
 void printQueue(struct node ** head){
-	if (head == NULL){
+	struct node * ptrCurrent = *head;
+	if (ptrCurrent == NULL){
 		puts("Queue is empty!\n");
 	} else {
 		puts("The Queue is: ");
 	
-		while(head != NULL){
-			printf("%c --> ", (*head)->data);
-			*head = (*head)->pNext;
+		while(ptrCurrent != NULL){
+			printf("%c --> ", ptrCurrent->data);
+			ptrCurrent = ptrCurrent->pNext;
 		}
 		puts(" NULL\n");
 	}
