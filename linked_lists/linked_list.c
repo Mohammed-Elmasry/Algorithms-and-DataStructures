@@ -7,7 +7,7 @@ struct node {
 };
 
 //prototypes
-int * delete(struct node** head, char value);
+int delete(struct node** head, char value);
 void printList(struct node* head);
 void reverse(struct node ** head);
 void destroyList(struct node** head);
@@ -73,7 +73,7 @@ void printList(struct node* head){
 	printf("\n");
 }
 
-int * delete(struct node** head, char value){
+int delete(struct node** head, char value){
 	int retval = 0;
 	struct node* temp;
 	struct node* ptrPrev = NULL;
