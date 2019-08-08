@@ -7,12 +7,13 @@ struct node {
 };
 
 //prototypes
-void printQueue(struct node * head);
+void printQueue(struct node ** head);
 int enqueue(struct node** head, struct node** tail, char value);
-int isEmpty(struct node * ptr);
+struct node * dequeue(struct node ** head);
 
 int main(void){
-	struct node *pHead, *pTail = NULL;
+	struct node *pHead = NULL;
+	struct node *pTail = NULL;
 	enqueue(&pHead, &pTail, 'C');
 	return 0;
 }
@@ -20,36 +21,46 @@ int main(void){
 
 int enqueue(struct node** head, struct node** tail, char value){
 	int retval = 0;
-	struct node * ptrNew = (struct node *)malloc(sizeof(struct node));
-	if (ptrNew){
+	struct node * ptrNew = (struct node *) malloc(sizeof(struct node));
+	if (ptrNew != NULL){
 		ptrNew->data = value;
 		ptrNew->pNext = NULL;
 
-		if(isEmpty(*head)){
-			(*head)->pNext = ptrNew;
+		if(*head == NULL){
+			*head = ptrNew;
 		} else {
 			(*tail)->pNext = ptrNew;	
 		}
 		*tail = ptrNew; //the tail has to point to the newly added node anyway
 		retval = 1;
 	} else {
-		printf("%c not inserted, memory allocation failed!", value);
+		printf("%c not inserted, memory allocation failed!\n", value);
 	}
 	return retval;
 }
 
-void printQueue(struct node * head){
+// char dequeue(struct node ** head){
+// 	char temp;
+// 	struct node * ptr = (struct node *) malloc(sizeof(struct node));
+// 	if(temp){
+// 		temp = (*head);
+// 		(*head) = temp->pNext;
+// 	} else {
+// 		printf("memory allocation failed!");
+// 	}
+// 	return temp;
+// }
+
+void printQueue(struct node ** head){
 	if (head == NULL){
 		puts("Queue is empty!\n");
+	} else {
+		puts("The Queue is: ");
+	
+		while(head != NULL){
+			printf("%c --> ", (*head)->data);
+			*head = (*head)->pNext;
+		}
+		puts(" NULL\n");
 	}
-
-	while(head != NULL){
-		printf("%c --> ", head->data);
-		head = head->pNext;
-	}
-	puts(" NULL\n");
-}
-
-int isEmpty(struct node * ptr){
-	return ptr == NULL;
 }
