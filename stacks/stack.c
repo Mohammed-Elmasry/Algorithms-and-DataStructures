@@ -21,6 +21,7 @@ int main(void){
 	push(&pTop, 11);
 	pop(&pTop);
 	pop(&pTop);
+	pop(&pTop);
 	printStack(pTop);
 	return 0;
 }
@@ -56,7 +57,7 @@ void printStack(struct node* top){
 
 
 int pop(struct node** top){
-	retval = -1;
+	int retval = -1;
 	struct node * pTemp = *top;
 	*top = pTemp->pNext;
 	retval = pTemp->data;

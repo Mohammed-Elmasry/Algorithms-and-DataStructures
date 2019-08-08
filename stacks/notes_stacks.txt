@@ -1,0 +1,4 @@
+#1 in case you wanted to add a limit to the stack (i.e. max stack limit), this could be done in 2 ways:
+	
+	1- in an OOPL, create a stack class that's composed of a list of nodes (could use an array).
+	2- in a procedural language, create a global variable that's keeping the limit, and check and modify this variable each time you push or pop an element (conditionally).
