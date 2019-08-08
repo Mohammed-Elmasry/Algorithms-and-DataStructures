@@ -9,13 +9,17 @@ struct node {
 //prototypes
 void printQueue(struct node ** head);
 int enqueue(struct node** head, struct node** tail, char value);
-struct node * dequeue(struct node ** head);
+char dequeue(struct node ** head, struct node ** tail);
 
 int main(void){
 	struct node *pHead = NULL;
 	struct node *pTail = NULL;
 	enqueue(&pHead, &pTail, 'C');
 	enqueue(&pHead, &pTail, 'D');
+	printQueue(&pHead);
+	dequeue(&pHead, &pTail);
+	printQueue(&pHead);
+	dequeue(&pHead, &pTail);
 	printQueue(&pHead);
 	return 0;
 }
@@ -41,17 +45,20 @@ int enqueue(struct node** head, struct node** tail, char value){
 	return retval;
 }
 
-// char dequeue(struct node ** head){
-// 	char temp;
-// 	struct node * ptr = (struct node *) malloc(sizeof(struct node));
-// 	if(temp){
-// 		temp = (*head);
-// 		(*head) = temp->pNext;
-// 	} else {
-// 		printf("memory allocation failed!");
-// 	}
-// 	return temp;
-// }
+char dequeue(struct node ** head, struct node ** tail){
+	char temp;
+	struct node * ptr = (struct node *) malloc(sizeof(struct node));
+	temp = (*head)->data;	
+	ptr = *head;
+	*head = (*head)->pNext;
+	
+	if(*head == NULL){
+		*tail = NULL; //the queue is empty	
+	} 
+
+	free(ptr);
+	return temp;
+}
 
 void printQueue(struct node ** head){
 	struct node * ptrCurrent = *head;
