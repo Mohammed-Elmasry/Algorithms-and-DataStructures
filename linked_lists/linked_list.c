@@ -8,7 +8,7 @@ struct node {
 
 //prototypes
 struct node * delete(struct node** head, char value);
-void printList(struct node** head);
+void printList(struct node* head);
 void reverse(struct node ** head);
 void destroyList(struct node** head);
 int append(struct node** head, char value);
@@ -61,12 +61,10 @@ int append(struct node** head, char value){
 }
 
 
-void printList(struct node** head){
-	struct node * ptr;
-	ptr = *head;
-	while(ptr != NULL){
-		printf("%c --> ", ptr->data);
-		ptr = ptr->pNext;
+void printList(struct node* head){
+	while(head != NULL){
+		printf("%c --> ", head->data);
+		head = head->pNext;
 	}
 	printf(" NULL");
 	printf("\n");
