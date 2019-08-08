@@ -7,7 +7,7 @@ struct node {
 };
 
 //prototypes
-struct node * delete(struct node** head, char value);
+int * delete(struct node** head, char value);
 void printList(struct node* head);
 void reverse(struct node ** head);
 void destroyList(struct node** head);
@@ -29,7 +29,10 @@ int main(void){
 	orderedInsert(&pHead, 'Z');
 	orderedInsert(&pHead, 'N');
 	orderedInsert(&pHead, 'L');	
-	printList(&pHead);
+	printList(pHead);
+	// delete(&pHead, 'O');
+	printList(pHead);
+
 	return 0;
 }
 
@@ -70,16 +73,24 @@ void printList(struct node* head){
 	printf("\n");
 }
 
-struct node * delete(struct node** head, char value){
+int * delete(struct node** head, char value){
+	int retval = 0;
 	struct node* temp;
 	struct node* ptrPrev = NULL;
 	temp = *head;
-	while(temp->data != value){
+	while(temp->data != value && temp != NULL){ // searching...
 		ptrPrev = temp;
 		temp = temp->pNext;
 	}
-	ptrPrev->pNext = temp->pNext;
-	return temp;
+	if(temp != NULL){
+		ptrPrev->pNext = temp->pNext;
+		free(temp);
+		retval = 1;
+	} else {
+		// not found
+		printf("%c was not found!\n", value);
+	}
+	return retval;
 }
 
 void reverse(struct node ** head){
