@@ -11,12 +11,21 @@ struct node {
 
 //prototypes
 int append(struct node ** head, struct node** tail, char value);
+void printList(struct node* head);
+
 
 int main(void){
 	struct node * pHead = NULL;
 	struct node * pTail = NULL;
 
 	append(&pHead, &pTail, 'C');
+	printList(pHead);
+	append(&pHead, &pTail, 'D');
+	append(&pHead, &pTail, 'F');
+	append(&pHead, &pTail, 'G');
+	append(&pHead, &pTail, 'E');
+	printList(pHead);
+
 	return 0;
 }
 
@@ -42,4 +51,17 @@ int append(struct node ** head, struct node** tail, char value){
 		retval = 0;
 	}
 }
+
+void printList(struct node* head){
+	while(head != NULL){
+		printf("%c --> ", head->data);
+		head = head->pNext;
+	}
+	printf(" NULL");
+	printf("\n");
+}
+
+
+
+
 
