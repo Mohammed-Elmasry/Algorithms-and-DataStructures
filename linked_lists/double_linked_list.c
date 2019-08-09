@@ -14,6 +14,7 @@ int append(struct node ** head, struct node** tail, char value);
 int delete(struct node** head, struct node ** tail, char value);
 int insertAt(struct node** head, struct node ** tail, int index, char value);
 int getLength(struct node * head);
+int add(struct node** head, char value);
 void printList(struct node* head);
 struct node * find(struct node* head, char value);
 
@@ -33,8 +34,8 @@ int main(void){
 	// insertAt(&pHead, &pTail, 0, 'H');
 	// printf("length of list is %d\n", getLength(pHead));
 	printList(pHead);
-	struct node* found = find(pHead, 'G');
-	printf("%p pointer was returned\n", found);
+	add(&pHead, 'S');
+	printList(pHead);
 	return 0;
 }
 
@@ -153,4 +154,18 @@ struct node * find(struct node* head, char value){
 		ptr = ptr->pNext;
 	}
 	return ptr;	
+}
+
+int add(struct node** head, char value){
+	int retval = 0;
+	struct node * ptr = (struct node*)malloc(sizeof(struct node));
+	if(ptr){
+		ptr->data = value;
+		ptr->pPrev = NULL;
+		ptr->pNext = *head;
+		*head = ptr;
+	} else {
+		printf("%c not inserted, memory allocation failed", value);
+	}
+	return retval;
 }
