@@ -94,3 +94,31 @@ int delete(struct node** head, struct node ** tail, char value){
 	}
 	return retval;
 }
+
+int insertAt(struct node** head, int index, char value){
+	int retval = 0;
+	struct node* ptrNew=(struct node*)malloc(sizeof(struct node));
+	if(ptrNew){
+		ptrNew->data = value;
+		struct node* ptr = *head;
+		struct node* ptrPrev = NULL;
+		int i = 1;
+		while(i < index - 1 && ptr->pNext != NULL){
+			i++;
+			ptrPrev = ptr;
+			ptr = ptr->pNext;
+		}
+		if(ptrPrev != NULL){ // insert at first index (0)
+			ptrNew->pNext = ptr->pNext;
+			ptr->pNext = ptrNew;	
+		} else {
+			ptrNew->pNext = *head;
+			*head = ptrNew;
+		}
+		retval = 1;
+	} else {
+		printf("%c not inserted, memory allocation failed\n", value);
+	}
+	
+	return retval;
+}	

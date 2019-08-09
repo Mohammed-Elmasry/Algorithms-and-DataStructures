@@ -27,8 +27,7 @@ int main(void){
 	orderedInsert(&pHead, 'N');
 	orderedInsert(&pHead, 'L');	
 	printList(pHead);
-	delete(&pHead, 'A');
-
+	insertAt(&pHead, 6, 'A');
 	printList(pHead);
 
 	return 0;
@@ -60,7 +59,6 @@ int append(struct node** head, char value){
 
 	return retval;
 }
-
 
 void printList(struct node* head){
 	while(head != NULL){
@@ -120,15 +118,15 @@ int insertAt(struct node** head, int index, char value){
 		ptrNew->data = value;
 		struct node* ptr = *head;
 		struct node* ptrPrev = NULL;
-		int i = 1;
-		while(i < index - 1 && ptr->pNext != NULL){
+		int i = 0;
+		while(i < index && ptr != NULL){
 			i++;
 			ptrPrev = ptr;
 			ptr = ptr->pNext;
 		}
 		if(ptrPrev != NULL){
-			ptrNew->pNext = ptr->pNext;
-			ptr->pNext = ptrNew;	
+			ptrNew->pNext = ptr;
+			ptrPrev->pNext = ptrNew;	
 		} else {
 			ptrNew->pNext = *head;
 			*head = ptrNew;
@@ -137,7 +135,6 @@ int insertAt(struct node** head, int index, char value){
 	} else {
 		printf("%c not inserted, memory allocation failed\n", value);
 	}
-	
 	return retval;
 }	
 

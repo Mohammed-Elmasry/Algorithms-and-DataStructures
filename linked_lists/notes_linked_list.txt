@@ -21,3 +21,6 @@ do i need to be not null to have data or do I need to have data to not be null ?
 You need to be not null (be actual node) so we can start talking about your data.
 
 note that: this happens only in compound conditional while loops.
+
+
+#8 You don't need to reverse a doubly linked list because traversing the linked list from the tail will produce the same result.
