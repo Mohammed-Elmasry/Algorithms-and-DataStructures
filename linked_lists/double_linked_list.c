@@ -10,11 +10,12 @@ struct node {
 };
 
 //prototypes
-int append(struct node ** head, struct node** tail, char value);
-int delete(struct node** head, struct node ** tail, char value);
-int insertAt(struct node** head, struct node ** tail, int index, char value);
 int getLength(struct node * head);
 int add(struct node** head, char value);
+int append(struct node ** head, struct node** tail, char value);
+int delete(struct node** head, struct node ** tail, char value);
+int orderedInsert(struct node ** head, struct node ** tail, char value);
+int insertAt(struct node** head, struct node ** tail, int index, char value);
 void printList(struct node* head);
 void destroyList(struct node** head, struct node ** tail);
 struct node * find(struct node* head, char value);
@@ -26,20 +27,18 @@ int main(void){
 	append(&pHead, &pTail, 'C');
 	// printList(pHead);
 	append(&pHead, &pTail, 'D');
-	append(&pHead, &pTail, 'F');
-	append(&pHead, &pTail, 'G');
-	append(&pHead, &pTail, 'E');
+	append(&pHead, &pTail, 'H');
+	// append(&pHead, &pTail, 'G');
+	// append(&pHead, &pTail, 'E');
 	// printList(pHead);
 	// delete(&pHead, &pTail, 'A');
 	// printList(pHead);
-	insertAt(&pHead, &pTail, 0, 'H');
+	// insertAt(&pHead, &pTail, 0, 'H');
 	// printf("length of list is %d\n", getLength(pHead));
 	printList(pHead);
-	add(&pHead, 'S');
+	orderedInsert(&pHead, &pTail, 'S');
 	printList(pHead);
-	destroyList(&pHead, &pTail);
-	puts("final step...");
-	printList(pHead);
+	
 	return 0;
 }
 
@@ -183,4 +182,37 @@ void destroyList(struct node** head, struct node ** tail){
 	}
 	*head = NULL;
 	*tail = NULL;
+}
+
+int orderedInsert(struct node ** head, struct node ** tail, char value){
+	int retval = 0;
+	struct node * ptrNew = (struct node *)malloc(sizeof(struct node));
+	if(ptrNew){
+		ptrNew->data = value;
+	 	ptrNew->pNext = NULL;
+	 	ptrNew->pPrev = NULL;
+		struct node* ptrCurrent = *head; // pointing to first node
+		while(ptrCurrent != NULL && ptrCurrent->data < value){
+			ptrCurrent = ptrCurrent->pNext;
+		}
+		if(ptrCurrent != NULL){
+			if(ptrCurrent->pPrev != NULL){
+				ptrNew->pNext = ptrCurrent;
+				(ptrCurrent->pPrev)->pNext = ptrNew;
+			} else {
+				ptrNew->pNext = ptrCurrent;
+				*head = ptrNew;
+			}	
+		} else {
+			ptrNew->pPrev = *tail;
+			(*tail)->pNext = ptrNew;
+			*tail = ptrNew;
+		}
+		
+		retval = 1;
+	} else {
+		printf("%c not inserted, memory allocation failed", value);
+	}
+
+	return retval;
 }
