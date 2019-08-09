@@ -16,6 +16,7 @@ int insertAt(struct node** head, int index, char value);
 int find(struct node** const head, char value);
 int add(struct node** head, char value);
 int orderedInsert(struct node ** head, char value);
+int getLength(struct node * head);
 
 int main(void){
 
@@ -201,5 +202,14 @@ int orderedInsert(struct node ** head, char value){
 		printf("%c not inserted, memory allocation failed", value);
 	}
 
+	return retval;
+}
+
+int getLength(struct node * head){
+	int retval = 0;
+	while (head != NULL){
+		retval++;
+		head = head->pNext;
+	}
 	return retval;
 }
