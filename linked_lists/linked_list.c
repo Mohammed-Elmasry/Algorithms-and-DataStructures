@@ -13,7 +13,7 @@ void reverse(struct node ** head);
 void destroyList(struct node** head);
 int append(struct node** head, char value);
 int insertAt(struct node** head, int index, char value);
-int find(struct node** const head, char value);
+struct node * find(struct node* head, char value);
 int add(struct node** head, char value);
 int orderedInsert(struct node ** head, char value);
 int getLength(struct node * head);
@@ -31,6 +31,8 @@ int main(void){
 	insertAt(&pHead, 6, 'A');
 	printList(pHead);
 	printf("length of list is %d\n", getLength(pHead));
+	struct node * found = find(pHead, 'L');
+	printf("%p pointer was returned\n", found);
 	return 0;
 }
 
@@ -139,20 +141,15 @@ int insertAt(struct node** head, int index, char value){
 	return retval;
 }	
 
-int find(struct node** const head, char value){
-	int retval = -1;
-	int i = 0;
-	struct node* ptr = *head;
-	struct node* ptrFound = NULL;
+struct node * find(struct node* head, char value){
+	struct node* ptr = head;
 	while(ptr != NULL){
 		if(ptr->data == value){
-			return i;
+			return ptr;
 		}
 		ptr = ptr->pNext;
-		i++;
 	}
-	
-	return retval;
+	return ptr;	
 }
 
 
