@@ -14,3 +14,10 @@ some notes on construction of linked lists.
 #6 trying to access the pNext/pPrev of null gives a segmentation fault error (core dumped). This
 means you're trying to access a part of the memory that's not allocated.
 
+#7 when looping using while loops, make sure the more general condition is tested first.
+(i.e. necessary conditions are tested first in a loop).
+do i need to be not null to have data or do I need to have data to not be null ? (as a node)
+
+You need to be not null (be actual node) so we can start talking about your data.
+
+note that: this happens only in compound conditional while loops.

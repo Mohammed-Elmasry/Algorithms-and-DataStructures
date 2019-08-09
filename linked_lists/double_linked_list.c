@@ -11,6 +11,7 @@ struct node {
 
 //prototypes
 int append(struct node ** head, struct node** tail, char value);
+int delete(struct node** head, struct node ** tail, char value);
 void printList(struct node* head);
 
 
@@ -24,6 +25,8 @@ int main(void){
 	append(&pHead, &pTail, 'F');
 	append(&pHead, &pTail, 'G');
 	append(&pHead, &pTail, 'E');
+	printList(pHead);
+	delete(&pHead, &pTail, 'A');
 	printList(pHead);
 
 	return 0;
@@ -54,31 +57,34 @@ int append(struct node ** head, struct node** tail, char value){
 
 void printList(struct node* head){
 	while(head != NULL){
-		printf("%c --> ", head->data);
+		printf("%c <--> ", head->data);
 		head = head->pNext;
 	}
 	printf(" NULL");
 	printf("\n");
 }
 
-int delete(struct node** head, char value){
+int delete(struct node** head, struct node ** tail, char value){
 	int retval = 0;
 	struct node* temp;
-	struct node* ptrPrev = NULL;
 	if(*head == NULL){
 		printf("List is Empty!\n");
 	} else {
 		temp = *head;
 		while(temp != NULL && temp->data != value){
-			puts("loop access#");
-			ptrPrev = temp;
 			temp = temp->pNext;
 		}
 		if(temp != NULL){
-			if(ptrPrev != NULL){
-				ptrPrev->pNext = temp->pNext;
+			if(temp->pPrev != NULL){
+				if(temp->pNext != NULL){
+					(temp->pPrev)->pNext = temp->pNext;
+					(temp->pNext)->pPrev = temp->pPrev;	
+				} // last node in list
+					(temp->pPrev)->pNext = temp->pNext;
+					*tail = temp->pPrev;
 			} else {
 				*head = temp->pNext;
+				(*head)->pPrev = temp->pPrev;
 			}				
 			free(temp);
 			retval = 1;
