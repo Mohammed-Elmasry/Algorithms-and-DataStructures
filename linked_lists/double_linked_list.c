@@ -61,25 +61,30 @@ void printList(struct node* head){
 	printf("\n");
 }
 
-int * delete(struct node** head, char value){
+int delete(struct node** head, char value){
 	int retval = 0;
 	struct node* temp;
 	struct node* ptrPrev = NULL;
-	temp = *head;
-	while(temp->data != value && temp != NULL){ // searching...
-		ptrPrev = temp;
-		temp = temp->pNext;
-	}
-	if(temp != NULL){
-		ptrPrev->pNext = temp->pNext;
-		free(temp);
-		retval = 1;
+	if(*head == NULL){
+		printf("List is Empty!\n");
 	} else {
-		// not found
-		printf("%c was not found!\n", value);
+		temp = *head;
+		while(temp != NULL && temp->data != value){
+			puts("loop access#");
+			ptrPrev = temp;
+			temp = temp->pNext;
+		}
+		if(temp != NULL){
+			if(ptrPrev != NULL){
+				ptrPrev->pNext = temp->pNext;
+			} else {
+				*head = temp->pNext;
+			}				
+			free(temp);
+			retval = 1;
+		} else {
+			printf("Deletion failed, character %c not found!\n", value);
+		}
 	}
 	return retval;
 }
-
-
-

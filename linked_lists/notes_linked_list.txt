@@ -11,3 +11,6 @@ some notes on construction of linked lists.
 
 #5 linking a newly created cell to already existing lists from its side is easier and could be done as first step.
 
+#6 trying to access the pNext/pPrev of null gives a segmentation fault error (core dumped). This
+means you're trying to access a part of the memory that's not allocated.
+

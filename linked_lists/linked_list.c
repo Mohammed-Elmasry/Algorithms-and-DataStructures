@@ -20,17 +20,15 @@ int orderedInsert(struct node ** head, char value);
 int main(void){
 
 	struct node * pHead = NULL;
-	struct node node1;
-	pHead = &node1;
-	node1.data = 'A';
-	node1.pNext = NULL;
+	
 	orderedInsert(&pHead, 'C');
 	orderedInsert(&pHead, 'B');
 	orderedInsert(&pHead, 'Z');
 	orderedInsert(&pHead, 'N');
 	orderedInsert(&pHead, 'L');	
 	printList(pHead);
-	// delete(&pHead, 'O');
+	delete(&pHead, 'A');
+
 	printList(pHead);
 
 	return 0;
@@ -77,18 +75,26 @@ int delete(struct node** head, char value){
 	int retval = 0;
 	struct node* temp;
 	struct node* ptrPrev = NULL;
-	temp = *head;
-	while(temp->data != value && temp != NULL){ // searching...
-		ptrPrev = temp;
-		temp = temp->pNext;
-	}
-	if(temp != NULL){
-		ptrPrev->pNext = temp->pNext;
-		free(temp);
-		retval = 1;
+	if(*head == NULL){
+		printf("List is Empty!\n");
 	} else {
-		// not found
-		printf("%c was not found!\n", value);
+		temp = *head;
+		while(temp != NULL && temp->data != value){
+			puts("loop access#");
+			ptrPrev = temp;
+			temp = temp->pNext;
+		}
+		if(temp != NULL){
+			if(ptrPrev != NULL){
+				ptrPrev->pNext = temp->pNext;
+			} else {
+				*head = temp->pNext;
+			}				
+			free(temp);
+			retval = 1;
+		} else {
+			printf("Deletion failed, character %c not found!\n", value);
+		}
 	}
 	return retval;
 }
