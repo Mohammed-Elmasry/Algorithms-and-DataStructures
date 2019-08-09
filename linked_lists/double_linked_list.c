@@ -169,3 +169,14 @@ int add(struct node** head, char value){
 	}
 	return retval;
 }
+
+void destroyList(struct node** head, struct node ** tail){
+	struct node* ptr = *head;
+	while(ptr != NULL){
+		*head = ptr->pNext;
+		free(ptr);
+		ptr = *head; 
+	}
+	*head = NULL;
+	*tail = NULL;
+}

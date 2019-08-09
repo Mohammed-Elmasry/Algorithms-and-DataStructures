@@ -173,6 +173,7 @@ void destroyList(struct node** head){
 		free(ptr);
 		ptr = *head; 
 	}
+	*head = NULL; // reset the head
 }
 
 int orderedInsert(struct node ** head, char value){
