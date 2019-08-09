@@ -12,8 +12,8 @@ struct node {
 //prototypes
 int append(struct node ** head, struct node** tail, char value);
 int delete(struct node** head, struct node ** tail, char value);
+int insertAt(struct node** head, struct node ** tail, int index, char value);
 void printList(struct node* head);
-
 
 int main(void){
 	struct node * pHead = NULL;
@@ -21,12 +21,14 @@ int main(void){
 
 	append(&pHead, &pTail, 'C');
 	printList(pHead);
-	append(&pHead, &pTail, 'D');
-	append(&pHead, &pTail, 'F');
-	append(&pHead, &pTail, 'G');
-	append(&pHead, &pTail, 'E');
+	// append(&pHead, &pTail, 'D');
+	// append(&pHead, &pTail, 'F');
+	// append(&pHead, &pTail, 'G');
+	// append(&pHead, &pTail, 'E');
+	// printList(pHead);
+	// delete(&pHead, &pTail, 'A');
 	printList(pHead);
-	delete(&pHead, &pTail, 'A');
+	insertAt(&pHead, &pTail, 0, 'H');
 	printList(pHead);
 
 	return 0;
@@ -95,30 +97,37 @@ int delete(struct node** head, struct node ** tail, char value){
 	return retval;
 }
 
-int insertAt(struct node** head, int index, char value){
+int insertAt(struct node** head, struct node ** tail, int index, char value){
 	int retval = 0;
 	struct node* ptrNew=(struct node*)malloc(sizeof(struct node));
 	if(ptrNew){
 		ptrNew->data = value;
 		struct node* ptr = *head;
-		struct node* ptrPrev = NULL;
-		int i = 1;
-		while(i < index - 1 && ptr->pNext != NULL){
+		int i = 0;
+		while(i < index && ptr != NULL){
 			i++;
-			ptrPrev = ptr;
 			ptr = ptr->pNext;
 		}
-		if(ptrPrev != NULL){ // insert at first index (0)
-			ptrNew->pNext = ptr->pNext;
-			ptr->pNext = ptrNew;	
-		} else {
-			ptrNew->pNext = *head;
-			*head = ptrNew;
+		if(ptr != NULL && ptr->pPrev != NULL){ // not first place
+			ptrNew->pNext = ptr;
+			ptrNew->pPrev = ptr->pPrev;
+			(ptr->pPrev)->pNext = ptrNew;
+			ptr->pPrev = ptrNew;	
+		} else { 
+			if(ptr == NULL){ // last element
+				ptrNew->pNext = ptr;
+				(*tail)->pNext = ptrNew;
+				ptrNew->pPrev = (*tail);
+				*tail = ptrNew;	
+			} else { // first element
+				ptrNew->pNext = *head;
+				*head = ptrNew;
+			}
 		}
 		retval = 1;
 	} else {
 		printf("%c not inserted, memory allocation failed\n", value);
 	}
-	
 	return retval;
 }	
+
