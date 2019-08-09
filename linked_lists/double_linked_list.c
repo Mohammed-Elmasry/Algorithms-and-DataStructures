@@ -16,6 +16,7 @@ int insertAt(struct node** head, struct node ** tail, int index, char value);
 int getLength(struct node * head);
 int add(struct node** head, char value);
 void printList(struct node* head);
+void destroyList(struct node** head, struct node ** tail);
 struct node * find(struct node* head, char value);
 
 int main(void){
@@ -31,10 +32,13 @@ int main(void){
 	// printList(pHead);
 	// delete(&pHead, &pTail, 'A');
 	// printList(pHead);
-	// insertAt(&pHead, &pTail, 0, 'H');
+	insertAt(&pHead, &pTail, 0, 'H');
 	// printf("length of list is %d\n", getLength(pHead));
 	printList(pHead);
 	add(&pHead, 'S');
+	printList(pHead);
+	destroyList(&pHead, &pTail);
+	puts("final step...");
 	printList(pHead);
 	return 0;
 }
