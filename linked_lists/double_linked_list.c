@@ -15,24 +15,26 @@ int delete(struct node** head, struct node ** tail, char value);
 int insertAt(struct node** head, struct node ** tail, int index, char value);
 int getLength(struct node * head);
 void printList(struct node* head);
+struct node * find(struct node* head, char value);
 
 int main(void){
 	struct node * pHead = NULL;
 	struct node * pTail = NULL;
 
-	// append(&pHead, &pTail, 'C');
+	append(&pHead, &pTail, 'C');
 	// printList(pHead);
-	// append(&pHead, &pTail, 'D');
-	// append(&pHead, &pTail, 'F');
-	// append(&pHead, &pTail, 'G');
-	// append(&pHead, &pTail, 'E');
+	append(&pHead, &pTail, 'D');
+	append(&pHead, &pTail, 'F');
+	append(&pHead, &pTail, 'G');
+	append(&pHead, &pTail, 'E');
 	// printList(pHead);
 	// delete(&pHead, &pTail, 'A');
 	// printList(pHead);
 	// insertAt(&pHead, &pTail, 0, 'H');
-	printf("length of list is %d\n", getLength(pHead));
+	// printf("length of list is %d\n", getLength(pHead));
 	printList(pHead);
-
+	struct node* found = find(pHead, 'G');
+	printf("%p pointer was returned\n", found);
 	return 0;
 }
 
@@ -142,4 +144,13 @@ int getLength(struct node * head){
 	return retval;
 }
 
-
+struct node * find(struct node* head, char value){
+	struct node* ptr = head;
+	while(ptr != NULL){
+		if(ptr->data == value){
+			return ptr;
+		}
+		ptr = ptr->pNext;
+	}
+	return ptr;	
+}

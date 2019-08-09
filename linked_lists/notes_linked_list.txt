@@ -24,3 +24,5 @@ note that: this happens only in compound conditional while loops.
 
 
 #8 You don't need to reverse a doubly linked list because traversing the linked list from the tail will produce the same result.
+
+#9 on defining insertAt() for linked lists, it is safe to design the function in such a way that would result in an error if the list being referenced is already empty. Because a linked list doesn't have an index in the first place, you would make this a good excuse that the function will not work unless there is at, least, an element in the list.

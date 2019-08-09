@@ -30,7 +30,7 @@ int main(void){
 	printList(pHead);
 	insertAt(&pHead, 6, 'A');
 	printList(pHead);
-
+	printf("length of list is %d\n", getLength(pHead));
 	return 0;
 }
 
