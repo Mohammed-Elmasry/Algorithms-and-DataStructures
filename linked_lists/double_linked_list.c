@@ -13,22 +13,24 @@ struct node {
 int append(struct node ** head, struct node** tail, char value);
 int delete(struct node** head, struct node ** tail, char value);
 int insertAt(struct node** head, struct node ** tail, int index, char value);
+int getLength(struct node * head);
 void printList(struct node* head);
 
 int main(void){
 	struct node * pHead = NULL;
 	struct node * pTail = NULL;
 
-	append(&pHead, &pTail, 'C');
-	printList(pHead);
+	// append(&pHead, &pTail, 'C');
+	// printList(pHead);
 	// append(&pHead, &pTail, 'D');
 	// append(&pHead, &pTail, 'F');
 	// append(&pHead, &pTail, 'G');
 	// append(&pHead, &pTail, 'E');
 	// printList(pHead);
 	// delete(&pHead, &pTail, 'A');
-	printList(pHead);
-	insertAt(&pHead, &pTail, 0, 'H');
+	// printList(pHead);
+	// insertAt(&pHead, &pTail, 0, 'H');
+	printf("length of list is %d\n", getLength(pHead));
 	printList(pHead);
 
 	return 0;
@@ -130,4 +132,14 @@ int insertAt(struct node** head, struct node ** tail, int index, char value){
 	}
 	return retval;
 }	
+
+int getLength(struct node * head){
+	int retval = 0;
+	while (head != NULL){
+		retval++;
+		head = head->pNext;
+	}
+	return retval;
+}
+
 
