@@ -10,6 +10,7 @@ struct node {
 };
 
 //prototypes
+int swap(struct node * ptr);
 int getLength(struct node * head);
 int add(struct node** head, char value);
 int append(struct node ** head, struct node** tail, char value);
@@ -27,18 +28,20 @@ int main(void){
 	append(&pHead, &pTail, 'C');
 	// printList(pHead);
 	append(&pHead, &pTail, 'D');
-	append(&pHead, &pTail, 'H');
-	// append(&pHead, &pTail, 'G');
-	// append(&pHead, &pTail, 'E');
+	// append(&pHead, &pTail, 'H');
+	append(&pHead, &pTail, 'G');
+	append(&pHead, &pTail, 'E');
 	// printList(pHead);
 	// delete(&pHead, &pTail, 'A');
 	// printList(pHead);
-	// insertAt(&pHead, &pTail, 0, 'H');
+	insertAt(&pHead, &pTail, 0, 'H');
 	// printf("length of list is %d\n", getLength(pHead));
 	printList(pHead);
 	orderedInsert(&pHead, &pTail, 'S');
 	printList(pHead);
-	
+	struct node * found = find(pHead, 'H');
+	swap(found);
+	printList(pHead);
 	return 0;
 }
 
@@ -105,6 +108,7 @@ int delete(struct node** head, struct node ** tail, char value){
 	return retval;
 }
 
+	
 int insertAt(struct node** head, struct node ** tail, int index, char value){
 	int retval = 0;
 	struct node* ptrNew=(struct node*)malloc(sizeof(struct node));
@@ -137,8 +141,7 @@ int insertAt(struct node** head, struct node ** tail, int index, char value){
 		printf("%c not inserted, memory allocation failed\n", value);
 	}
 	return retval;
-}	
-
+}
 int getLength(struct node * head){
 	int retval = 0;
 	while (head != NULL){
@@ -205,7 +208,7 @@ int orderedInsert(struct node ** head, struct node ** tail, char value){
 			}	
 		} else {
 			ptrNew->pPrev = *tail;
-			(*tail)->pNext = ptrNew;
+			(*tail)->pNext = ptrNew;	
 			*tail = ptrNew;
 		}
 		
@@ -214,5 +217,30 @@ int orderedInsert(struct node ** head, struct node ** tail, char value){
 		printf("%c not inserted, memory allocation failed", value);
 	}
 
+	return retval;
+}
+
+int swap(struct node * ptr){
+	int retval = 0;
+	if(ptr->pNext && ptr->pPrev){ // not first element
+		(ptr->pPrev)->pNext = ptr->pNext;
+		(ptr->pNext)->pPrev = ptr->pPrev;
+		ptr->pNext = ptr->pPrev;
+		ptr->pPrev = (ptr->pPrev)->pPrev;
+		((ptr->pPrev)->pNext)->pPrev = ptr;
+		(ptr->pPrev)->pNext = ptr;
+		retval = 1;
+	} else {
+		if(ptr->pPrev){ // if it's the last element
+			(ptr->pPrev)->pNext = ptr->pNext;
+			ptr->pNext = ptr->pPrev;
+			ptr->pPrev = (ptr->pPrev)->pPrev;
+			((ptr->pPrev)->pNext)->pPrev = ptr;
+			(ptr->pPrev)->pNext = ptr;
+			retval = 1;		
+		} else {
+			puts("cannot swap the first element, list not changed!");
+		}
+	}
 	return retval;
 }
