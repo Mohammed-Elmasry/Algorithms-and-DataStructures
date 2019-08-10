@@ -1,0 +1,2 @@
+#1 Insertion Sort uses the same alogorithm of orderedInsert() of linked lists because practically you're copying the data from a node and trying to insert the newly created node in an ordered fashion.
+
