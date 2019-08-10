@@ -211,3 +211,7 @@ int getLength(struct node * head){
 	}
 	return retval;
 }
+
+void MTF(struct node ** head, struct node * ptr){
+	
+}
