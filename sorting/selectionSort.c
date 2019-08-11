@@ -19,10 +19,10 @@ int main(void){
 	struct node n3;
 	struct node n4;
 
-	n1.data = 1;
-	n2.data = 2;
-	n3.data = 3;
-	n4.data = 4;
+	n1.data = 3;
+	n2.data = 4;
+	n3.data = 1;
+	n4.data = 2;
 
 	n1.pNext = &n2;
 	n2.pNext = &n3;
@@ -30,27 +30,17 @@ int main(void){
 	n4.pNext = NULL;
 
 	head = &n1;
-	// struct node * found = find(head, 4);
-	// printf("%p was found\n", found);
-	swap(&head, find(head, 2), find(head, 4));
+
 	printList(head);
-
-	// swap(&head, find(head, 1), find(head, 2));
-	// printList(head);
-	
-	// swap(&head, find(head, 2), find(head, 3));
-	// printList(head);
-
-	// swap(&head, find(head, 2), find(head, 4));
-	// printList(head);
-
+	selectionSort(&head);
+	printList(head);
 	return 0;
 }
 
 struct node * selectionSort(struct node ** head){
-	struct node * ptrSwap;
-	struct node * ptrCurrent;
-	struct node * ptrMin;
+	struct node * ptrSwap; // marks the element to swap with minimum
+	struct node * ptrCurrent; // current scanner pointer
+	struct node * ptrMin; // pointer to minimum value
 
 	ptrSwap = *head;
 	
@@ -64,15 +54,13 @@ struct node * selectionSort(struct node ** head){
 			ptrCurrent = ptrCurrent->pNext;
 		}
 		swap(head, ptrSwap, ptrMin);
-		ptrSwap = ptrSwap->pNext;
+		ptrSwap = ptrMin->pNext;
 	}
 }
 
 void swap(struct node ** head, struct node * p1, struct node * p2){
 	if(p1 == *head){ // p1 is first element
-		puts("first element detected!");
 		if(p1->pNext == p2){
-			puts("consecutive case found!");	
 			p1->pNext = p2->pNext;
 			p2->pNext = *head;
 		    *head = p2;
@@ -90,7 +78,6 @@ void swap(struct node ** head, struct node * p1, struct node * p2){
 		}
 	} else { // p1 is not first element
 		// case: consecutive pointers and p1 is not first element
-		puts("no first element detected!");
 		if(p1->pNext == p2){
 			struct node *prevLeft = *head;
 			while(prevLeft->pNext != p1){
@@ -100,7 +87,6 @@ void swap(struct node ** head, struct node * p1, struct node * p2){
 			p2->pNext = p1;
 			prevLeft->pNext = p2;
 		} else { // the normal form of swap (p1 and p2 are in the middle)
-			puts("normal case detected!");
 			struct node * prevRight = *head;
 			struct node * prevLeft = *head;
 			struct node * afterLeft = p1->pNext;
