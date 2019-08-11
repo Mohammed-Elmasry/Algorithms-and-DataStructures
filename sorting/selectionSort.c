@@ -17,12 +17,12 @@ int main(void){
 	struct node n2;
 
 	n1.data = 3;
-	n2.data = ;
-	n1.pNext = n2;
+	n2.data = 5;
+	n1.pNext = &n2;
 	n2.pNext = NULL;
 	head = &n1;
 
-
+	printList(head);
 	return 0;
 }
 
@@ -96,7 +96,7 @@ void swap(struct node ** head, struct node * p1, struct node * p2){
 
 void printList(struct node* head){
 	while(head != NULL){
-		printf("%c <--> ", head->data);
+		printf("%d <--> ", head->data);
 		head = head->pNext;
 	}
 	printf(" NULL");
