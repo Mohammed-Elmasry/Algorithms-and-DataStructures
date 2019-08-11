@@ -9,6 +9,7 @@ struct node {
 //prototypes
 void swap(struct node ** head, struct node * p1, struct node * p2);
 struct node * selectionSort(struct node ** head);
+struct node * find(struct node* head, int value);
 void printList(struct node* head);
 
 int main(void){
@@ -21,7 +22,7 @@ int main(void){
 	n1.pNext = &n2;
 	n2.pNext = NULL;
 	head = &n1;
-
+	swap(&head);
 	printList(head);
 	return 0;
 }
@@ -101,4 +102,15 @@ void printList(struct node* head){
 	}
 	printf(" NULL");
 	printf("\n");
+}
+
+struct node * find(struct node* head, int value){
+	struct node* ptr = head;
+	while(ptr != NULL){
+		if(ptr->data == value){
+			return ptr;
+		}
+		ptr = ptr->pNext;
+	}
+	return ptr;	
 }
