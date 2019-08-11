@@ -7,16 +7,16 @@ struct node {
 };
 
 //prototypes
-int delete(struct node** head, char value);
 void printList(struct node* head);
 void reverse(struct node ** head);
 void destroyList(struct node** head);
+int getLength(struct node * head);
 int append(struct node** head, char value);
-int insertAt(struct node** head, int index, char value);
-struct node * find(struct node* head, char value);
+int delete(struct node** head, char value);
 int add(struct node** head, char value);
 int orderedInsert(struct node ** head, char value);
-int getLength(struct node * head);
+int insertAt(struct node** head, int index, char value);
+struct node * find(struct node* head, char value);
 
 int main(void){
 
@@ -28,11 +28,6 @@ int main(void){
 	orderedInsert(&pHead, 'N');
 	orderedInsert(&pHead, 'L');	
 	printList(pHead);
-	insertAt(&pHead, 6, 'A');
-	printList(pHead);
-	printf("length of list is %d\n", getLength(pHead));
-	struct node * found = find(pHead, 'L');
-	printf("%p pointer was returned\n", found);
 	return 0;
 }
 
@@ -213,5 +208,5 @@ int getLength(struct node * head){
 }
 
 void MTF(struct node ** head, struct node * ptr){
-	
+
 }

@@ -1,2 +1,6 @@
-#1 Insertion Sort uses the same alogorithm of orderedInsert() of linked lists because practically you're copying the data from a node and trying to insert the newly created node in an ordered fashion.
+#1 Insertion Sort uses the same alogorithm of orderedInsert() of linked lists because practically you're copying the data from a node and trying to insert the newly created node in an ordered fashion. deshalb ist "insertion sort" sehr gut für "linked lists".
+
+#2 worst case time complexity of insertion sort is O(n^2) and best case is O(n). Its average would be practically faster than the worst case but it would also be O(n^2).
+
+#3 some sorting algorithms don't actually work with linked lists.
 
