@@ -16,14 +16,34 @@ int main(void){
 	struct node * head = NULL;
 	struct node n1;
 	struct node n2;
+	struct node n3;
+	struct node n4;
 
-	n1.data = 3;
-	n2.data = 5;
+	n1.data = 1;
+	n2.data = 2;
+	n3.data = 3;
+	n4.data = 4;
+
 	n1.pNext = &n2;
-	n2.pNext = NULL;
+	n2.pNext = &n3;
+	n3.pNext = &n4;
+	n4.pNext = NULL;
+
 	head = &n1;
-	swap(&head);
+	// struct node * found = find(head, 4);
+	// printf("%p was found\n", found);
+	swap(&head, find(head, 2), find(head, 4));
 	printList(head);
+
+	// swap(&head, find(head, 1), find(head, 2));
+	// printList(head);
+	
+	// swap(&head, find(head, 2), find(head, 3));
+	// printList(head);
+
+	// swap(&head, find(head, 2), find(head, 4));
+	// printList(head);
+
 	return 0;
 }
 
@@ -50,14 +70,16 @@ struct node * selectionSort(struct node ** head){
 
 void swap(struct node ** head, struct node * p1, struct node * p2){
 	if(p1 == *head){ // p1 is first element
-		if(p1->pNext == p2){	
+		puts("first element detected!");
+		if(p1->pNext == p2){
+			puts("consecutive case found!");	
 			p1->pNext = p2->pNext;
 			p2->pNext = *head;
 		    *head = p2;
 		} else {
 			// case: nonconsecutive pointers and p1 is first element
 			struct node * afterLeft = p1->pNext;
-			struct node * prevToRight = NULL;
+			struct node * prevToRight = *head;
 			while(prevToRight->pNext != p2){
 				prevToRight = prevToRight->pNext;
 			}
@@ -68,8 +90,9 @@ void swap(struct node ** head, struct node * p1, struct node * p2){
 		}
 	} else { // p1 is not first element
 		// case: consecutive pointers and p1 is not first element
+		puts("no first element detected!");
 		if(p1->pNext == p2){
-			struct node *prevLeft = NULL;
+			struct node *prevLeft = *head;
 			while(prevLeft->pNext != p1){
 				prevLeft = prevLeft->pNext;
 			}
@@ -77,14 +100,15 @@ void swap(struct node ** head, struct node * p1, struct node * p2){
 			p2->pNext = p1;
 			prevLeft->pNext = p2;
 		} else { // the normal form of swap (p1 and p2 are in the middle)
-			struct node * prevRight = NULL;
-			struct node * prevLeft = NULL;
-			struct node * afterLeft = NULL;
+			puts("normal case detected!");
+			struct node * prevRight = *head;
+			struct node * prevLeft = *head;
+			struct node * afterLeft = p1->pNext;
 
 			while(prevLeft->pNext != p1){
-				prevLeft= prevLeft->pNext;
+				prevLeft = prevLeft->pNext;
 			}
-			while(prevRight->pNext != p1){
+			while(prevRight->pNext != p2){
 				prevRight= prevRight->pNext;
 			}
 			p1->pNext = p2->pNext;
@@ -97,7 +121,7 @@ void swap(struct node ** head, struct node * p1, struct node * p2){
 
 void printList(struct node* head){
 	while(head != NULL){
-		printf("%d <--> ", head->data);
+		printf("%d --> ", head->data);
 		head = head->pNext;
 	}
 	printf(" NULL");
