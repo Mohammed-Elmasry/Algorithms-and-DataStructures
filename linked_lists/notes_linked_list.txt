@@ -31,4 +31,8 @@ note that: this happens only in compound conditional while loops.
 
 #11 after freeing the memory of a linked list, don't forget to reset the head and/or tail to NULL so they don't point to the same place in memory but now that place belongs to the Operating System and god knows what's running now on this memory address.
 
- 
+----------------------------- circular linked lists ------------------------------------
+
+#1 a circular linked list could be broken by checking if the next element is not null and its pointer value equals that of the head, then turn the current pNext to NULL;
+
+this way will flatten the circular list into a linear list
