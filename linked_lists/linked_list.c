@@ -17,16 +17,19 @@ int add(struct node** head, char value);
 int orderedInsert(struct node ** head, char value);
 int insertAt(struct node** head, int index, char value);
 struct node * find(struct node* head, char value);
+void removeDuplicates(struct node ** head);
 
 int main(void){
 
 	struct node * pHead = NULL;
 	
 	orderedInsert(&pHead, 'C');
-	orderedInsert(&pHead, 'B');
+	orderedInsert(&pHead, 'C');
 	orderedInsert(&pHead, 'Z');
 	orderedInsert(&pHead, 'N');
 	orderedInsert(&pHead, 'L');	
+	printList(pHead);
+	removeDuplicates(&pHead);
 	printList(pHead);
 	return 0;
 }
@@ -147,7 +150,6 @@ struct node * find(struct node* head, char value){
 	return ptr;	
 }
 
-
 int add(struct node** head, char value){
 	int retval = 0;
 	struct node * ptr = (struct node*)malloc(sizeof(struct node));
@@ -208,5 +210,33 @@ int getLength(struct node * head){
 }
 
 void MTF(struct node ** head, struct node * ptr){
+
+}
+
+void removeDuplicates(struct node ** head){
+	struct node * candidate = *head;
+	struct node * ptrPrev = NULL; //candidate;
+	struct node * ptrCurrent = NULL; // candidate->pNext;
+	struct node * ptrNext = NULL; // ptrCurrent->pNext;
+	
+	while(candidate != NULL && candidate->pNext){
+		ptrPrev = candidate;
+		ptrCurrent = candidate->pNext;
+		ptrNext = ptrCurrent->pNext;					
+		// main condition
+		while(ptrCurrent != NULL && ptrCurrent->pNext){
+			if (candidate->data == ptrCurrent->data){
+				ptrPrev->pNext = ptrNext;
+				free(ptrCurrent);
+				ptrCurrent = ptrNext;
+				ptrNext = ptrCurrent->pNext;
+			} else {
+				ptrPrev = ptrCurrent;
+				ptrCurrent = ptrNext;
+				ptrNext = ptrCurrent->pNext;
+			}
+		}
+		candidate = candidate->pNext;
+	}
 
 }
