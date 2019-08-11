@@ -35,4 +35,9 @@ note that: this happens only in compound conditional while loops.
 
 #1 a circular linked list could be broken by checking if the next element is not null and its pointer value equals that of the head, then turn the current pNext to NULL;
 
-this way will flatten the circular list into a linear list
+this way will flatten the circular list into a linear list.
+
+NOTE THAT: this function only works on true circular linked lists. not linked lists that are part-circular.
+
+#2 the cell/node with multiple pointers pointing to it is the beginning of the loop.
+
