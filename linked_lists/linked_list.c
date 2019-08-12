@@ -19,6 +19,7 @@ int insertAt(struct node** head, int index, char value);
 struct node * find(struct node* head, char value);
 void removeDuplicates(struct node ** head);
 void runnerRemoveDuplicates(struct node ** head);
+struct node * getK(struct node * head, int k);
 
 int main(void){
 
@@ -41,8 +42,8 @@ int main(void){
 	append(&pHead, 'T');
 
 	printList(pHead);
-	removeDuplicates(&pHead);
-	printList(pHead);
+	struct node * found = getK(pHead, 3);
+	printf("%c was located\n", found->data);
 	return 0;
 }
 
@@ -261,4 +262,21 @@ void runnerRemoveDuplicates(struct node ** head){
 		}
 		ptrCurrent = ptrCurrent->pNext;
 	}
+}
+
+struct node * getK(struct node * head, int k){
+	struct node * runner = head;
+	struct node * current = head;
+	int counter = 0;
+
+	while(counter < k && runner != NULL){
+		counter++;
+		runner = runner->pNext;
+	}
+
+	while(runner != NULL){
+		runner = runner->pNext;
+		current = current->pNext;
+	}
+	return current;
 }
