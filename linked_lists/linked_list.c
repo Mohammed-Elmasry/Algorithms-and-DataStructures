@@ -20,6 +20,7 @@ struct node * find(struct node* head, char value);
 void removeDuplicates(struct node ** head);
 void runnerRemoveDuplicates(struct node ** head);
 struct node * getK(struct node * head, int k);
+void deleteFromMiddle(struct node **head, struct node * target);
 
 int main(void){
 
@@ -42,8 +43,10 @@ int main(void){
 	append(&pHead, 'T');
 
 	printList(pHead);
-	struct node * found = getK(pHead, 3);
-	printf("%c was located\n", found->data);
+	struct node * found = find(pHead, 'Z');
+	deleteFromMiddle(&pHead, found);
+	printList(pHead);
+
 	return 0;
 }
 
@@ -97,6 +100,7 @@ int delete(struct node** head, char value){
 			temp = temp->pNext;
 		}
 		if(temp != NULL){
+			// code to handle first element
 			if(ptrPrev != NULL){
 				ptrPrev->pNext = temp->pNext;
 			} else {
@@ -277,4 +281,13 @@ struct node * getK(struct node * head, int k){
 		current = current->pNext;
 	}
 	return current;
+}
+
+void deleteFromMiddle(struct node **head, struct node * target){
+	struct node * current = *head;
+	while(current != NULL && current->pNext != target){
+		current = current->pNext;
+	}
+	current->pNext = target->pNext;
+	free(target);
 }
