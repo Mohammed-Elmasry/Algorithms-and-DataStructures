@@ -21,6 +21,7 @@ void removeDuplicates(struct node ** head);
 void runnerRemoveDuplicates(struct node ** head);
 struct node * getK(struct node * head, int k);
 void deleteFromMiddle(struct node **head, struct node * target);
+void deleteFromMid(struct node * target);
 
 int main(void){
 
@@ -35,7 +36,6 @@ int main(void){
 	append(&pHead, 'Z');
 	append(&pHead, 'L');	
 	append(&pHead, 'L');	
-	append(&pHead, 'T');
 	append(&pHead, 'S');
 	append(&pHead, 'H');
 	append(&pHead, 'Q');
@@ -44,7 +44,7 @@ int main(void){
 
 	printList(pHead);
 	struct node * found = find(pHead, 'Z');
-	deleteFromMiddle(&pHead, found);
+	deleteFromMid(found);
 	printList(pHead);
 
 	return 0;
@@ -290,4 +290,11 @@ void deleteFromMiddle(struct node **head, struct node * target){
 	}
 	current->pNext = target->pNext;
 	free(target);
+}
+
+void deleteFromMid(struct node * target){
+	struct node * temp = target->pNext;
+	target->data = temp->data;
+	target->pNext = temp->pNext;
+	free(temp);
 }
