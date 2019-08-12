@@ -23,11 +23,22 @@ int main(void){
 
 	struct node * pHead = NULL;
 	
-	orderedInsert(&pHead, 'C');
-	orderedInsert(&pHead, 'C');
-	orderedInsert(&pHead, 'Z');
-	orderedInsert(&pHead, 'N');
-	orderedInsert(&pHead, 'L');	
+	append(&pHead, 'C');
+	append(&pHead, 'C');
+	append(&pHead, 'Z');
+	append(&pHead, 'N');
+	append(&pHead, 'S');	
+	append(&pHead, 'P');	
+	append(&pHead, 'Z');
+	append(&pHead, 'L');	
+	append(&pHead, 'L');	
+	append(&pHead, 'T');
+	append(&pHead, 'S');
+	append(&pHead, 'H');
+	append(&pHead, 'Q');
+	append(&pHead, 'R');
+	append(&pHead, 'T');
+
 	printList(pHead);
 	removeDuplicates(&pHead);
 	printList(pHead);
@@ -236,7 +247,11 @@ void removeDuplicates(struct node ** head){
 				ptrNext = ptrCurrent->pNext;
 			}
 		}
+		// logic to deal in case of last element being a repitition...
+		if(ptrCurrent->data == candidate->data){
+			ptrPrev->pNext = ptrCurrent->pNext;
+			free(ptrCurrent);
+		}
 		candidate = candidate->pNext;
 	}
-
 }
