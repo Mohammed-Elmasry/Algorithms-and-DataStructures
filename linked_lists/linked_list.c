@@ -18,6 +18,7 @@ int orderedInsert(struct node ** head, char value);
 int insertAt(struct node** head, int index, char value);
 struct node * find(struct node* head, char value);
 void removeDuplicates(struct node ** head);
+void runnerRemoveDuplicates(struct node ** head);
 
 int main(void){
 
@@ -226,32 +227,38 @@ void MTF(struct node ** head, struct node * ptr){
 
 void removeDuplicates(struct node ** head){
 	struct node * candidate = *head;
-	struct node * ptrPrev = NULL; //candidate;
-	struct node * ptrCurrent = NULL; // candidate->pNext;
-	struct node * ptrNext = NULL; // ptrCurrent->pNext;
-	
-	while(candidate != NULL && candidate->pNext){
-		ptrPrev = candidate;
-		ptrCurrent = candidate->pNext;
-		ptrNext = ptrCurrent->pNext;					
+		while(candidate != NULL){
+		struct node * ptrCurrent = NULL; // candidate->pNext;
+		struct node * temp = NULL; // ptrCurrent->pNext;
+		ptrCurrent = candidate; // you're starting with candidate anyway
 		// main condition
 		while(ptrCurrent != NULL && ptrCurrent->pNext){
-			if (candidate->data == ptrCurrent->data){
-				ptrPrev->pNext = ptrNext;
-				free(ptrCurrent);
-				ptrCurrent = ptrNext;
-				ptrNext = ptrCurrent->pNext;
+			if (candidate->data == (ptrCurrent->pNext)->data){
+				temp = (ptrCurrent->pNext)->pNext;
+				free(ptrCurrent->pNext);
+				ptrCurrent->pNext = temp;
 			} else {
-				ptrPrev = ptrCurrent;
-				ptrCurrent = ptrNext;
-				ptrNext = ptrCurrent->pNext;
+				ptrCurrent = ptrCurrent->pNext;
 			}
 		}
-		// logic to deal in case of last element being a repitition...
-		if(ptrCurrent->data == candidate->data){
-			ptrPrev->pNext = ptrCurrent->pNext;
-			free(ptrCurrent);
-		}
 		candidate = candidate->pNext;
+	}
+}
+
+void runnerRemoveDuplicates(struct node ** head){
+	struct node * ptrCurrent = *head;
+	while(ptrCurrent != NULL){
+		struct node * runner = ptrCurrent;
+		struct node * temp = NULL;
+		while(runner->pNext){
+			if((runner->pNext)->data == ptrCurrent->data){
+				temp = (runner->pNext)->pNext;
+				free(runner->pNext);
+				runner->pNext = temp;
+			} else {
+				runner = runner->pNext;
+			}
+		}
+		ptrCurrent = ptrCurrent->pNext;
 	}
 }
