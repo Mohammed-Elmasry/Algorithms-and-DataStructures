@@ -267,10 +267,8 @@ void runnerRemoveDuplicates(struct node ** head){
 struct node * getK(struct node * head, int k){
 	struct node * runner = head;
 	struct node * current = head;
-	int counter = 0;
 
-	while(counter < k && runner != NULL){
-		counter++;
+	for(int i = 0; i < k && runner != NULL; i++){
 		runner = runner->pNext;
 	}
 
