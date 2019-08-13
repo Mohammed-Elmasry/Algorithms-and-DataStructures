@@ -335,7 +335,7 @@ void partitionBefore(struct node **head, int target){
 	}
 }
 
-int sumLists(struct node * head1, struct node * head2){
+int sumListsReversed(struct node * head1, struct node * head2){
 	int sum = 0;
 	int counter = 1;
 	struct node * current1, *current2;
@@ -351,6 +351,25 @@ int sumLists(struct node * head1, struct node * head2){
 		append(&newHead, sum % 10);
 		sum = sum / 10;
 	}
+	printList(newHead);
+	return 0;
+}
+
+int sumLists(struct node * head1, struct node * head2){
+	int sum = 0;
+	struct node * current1, *current2;
+	current1 = head1, current2 = head2;
+	struct node * newHead = NULL;
+	while(current1 != NULL && current2 != NULL){
+		sum = sum * 10 + current1->data + current2->data;
+		current1 = current1->pNext;
+		current2 = current2->pNext;
+	}
+	while(sum != 0){
+		append(&newHead, sum % 10);
+		sum = sum / 10;
+	}
+	puts("result reversed is: ");
 	printList(newHead);
 	return 0;
 }
