@@ -340,12 +340,17 @@ int sumLists(struct node * head1, struct node * head2){
 	int counter = 1;
 	struct node * current1, *current2;
 	current1 = head1, current2 = head2;
-
+	struct node * newHead = NULL;
 	while(current1 != NULL && current2 != NULL){
 		sum = sum + (current1->data * counter) + (current2->data * counter);
 		current1 = current1->pNext;
 		current2 = current2->pNext;
 		counter = counter * 10;
 	}
-	return sum;
+	while(sum != 0){
+		append(&newHead, sum % 10);
+		sum = sum / 10;
+	}
+	printList(newHead);
+	return 0;
 }
