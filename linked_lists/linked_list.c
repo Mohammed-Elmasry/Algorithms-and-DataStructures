@@ -23,6 +23,7 @@ struct node * getK(struct node * head, int k);
 void deleteFromMiddle(struct node **head, struct node * target);
 void deleteFromMid(struct node * target);
 void partitionBefore(struct node **head, int target);
+int sumLists(struct node * head1, struct node * head2);
 
 int main(void){
 
@@ -45,26 +46,29 @@ int main(void){
 	// append(&pHead, 'T');
 
 	struct node n1, n2, n3, n4, n5, n6;
+	struct node * pHead2 = NULL;
 	n1.data = 3;
 	n2.data = 7;
 	n3.data = 5;
 	n4.data = 1;
 	n5.data = 2;
-	n6.data = 11;
+	n6.data = 7;
 
 	n1.pNext = &n2;
 	n2.pNext = &n3;
-	n3.pNext = &n4;
+	n3.pNext = NULL;
 	n4.pNext = &n5;
 	n5.pNext = &n6;
 	n6.pNext = NULL;
 
 	pHead = &n1;
+	pHead2 = &n4; 
 
 	printList(pHead);
-	partitionBefore(&pHead, 5);
-	printList(pHead);
-
+	// partitionBefore(&pHead, 5);
+	int sum = sumLists(pHead, pHead2);
+	printList(pHead2);
+	printf("%d is the sum\n", sum);
 	return 0;
 }
 
@@ -329,4 +333,19 @@ void partitionBefore(struct node **head, int target){
 			current = current->pNext;
 		}
 	}
+}
+
+int sumLists(struct node * head1, struct node * head2){
+	int sum = 0;
+	int counter = 1;
+	struct node * current1, *current2;
+	current1 = head1, current2 = head2;
+
+	while(current1 != NULL && current2 != NULL){
+		sum = sum + (current1->data * counter) + (current2->data * counter);
+		current1 = current1->pNext;
+		current2 = current2->pNext;
+		counter = counter * 10;
+	}
+	return sum;
 }
