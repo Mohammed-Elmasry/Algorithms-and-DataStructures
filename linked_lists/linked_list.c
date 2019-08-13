@@ -24,6 +24,7 @@ void deleteFromMiddle(struct node **head, struct node * target);
 void deleteFromMid(struct node * target);
 void partitionBefore(struct node **head, int target);
 int sumLists(struct node * head1, struct node * head2);
+int sumListsReversed(struct node * head1, struct node * head2);
 
 int main(void){
 
