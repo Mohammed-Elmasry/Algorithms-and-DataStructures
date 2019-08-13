@@ -22,29 +22,47 @@ void runnerRemoveDuplicates(struct node ** head);
 struct node * getK(struct node * head, int k);
 void deleteFromMiddle(struct node **head, struct node * target);
 void deleteFromMid(struct node * target);
+void partitionBefore(struct node **head, int target);
 
 int main(void){
 
 	struct node * pHead = NULL;
 	
-	append(&pHead, 'C');
-	append(&pHead, 'C');
-	append(&pHead, 'Z');
-	append(&pHead, 'N');
-	append(&pHead, 'S');	
-	append(&pHead, 'P');	
-	append(&pHead, 'Z');
-	append(&pHead, 'L');	
-	append(&pHead, 'L');	
-	append(&pHead, 'S');
-	append(&pHead, 'H');
-	append(&pHead, 'Q');
-	append(&pHead, 'R');
-	append(&pHead, 'T');
+	// append(&pHead, 'C');
+	// append(&pHead, 'C');
+	// append(&pHead, 'Z');
+	// append(&pHead, 'A');
+	// append(&pHead, 'N');
+	// append(&pHead, 'S');	
+	// append(&pHead, 'P');	
+	// append(&pHead, 'Z');
+	// append(&pHead, 'L');	
+	// append(&pHead, 'L');	
+	// append(&pHead, 'S');
+	// append(&pHead, 'H');
+	// append(&pHead, 'Q');
+	// append(&pHead, 'R');
+	// append(&pHead, 'T');
+
+	struct node n1, n2, n3, n4, n5, n6;
+	n1.data = 3;
+	n2.data = 7;
+	n3.data = 5;
+	n4.data = 1;
+	n5.data = 2;
+	n6.data = 11;
+
+	n1.pNext = &n2;
+	n2.pNext = &n3;
+	n3.pNext = &n4;
+	n4.pNext = &n5;
+	n5.pNext = &n6;
+	n6.pNext = NULL;
+
+	pHead = &n1;
 
 	printList(pHead);
-	struct node * found = find(pHead, 'Z');
-	deleteFromMid(found);
+	partitionBefore(&pHead, 5);
 	printList(pHead);
 
 	return 0;
@@ -79,7 +97,7 @@ int append(struct node** head, char value){
 
 void printList(struct node* head){
 	while(head != NULL){
-		printf("%c --> ", head->data);
+		printf("%d --> ", head->data);
 		head = head->pNext;
 	}
 	printf(" NULL");
@@ -297,4 +315,18 @@ void deleteFromMid(struct node * target){
 	target->data = temp->data;
 	target->pNext = temp->pNext;
 	free(temp);
+}
+
+void partitionBefore(struct node **head, int target){
+	struct node * current = *head;
+	while(current->pNext){
+		if((current->pNext)->data < target){
+			struct node * temp = current->pNext;
+			current->pNext = temp->pNext;
+			temp->pNext = *head;
+			*head = temp;
+		} else {
+			current = current->pNext;
+		}
+	}
 }
