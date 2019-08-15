@@ -26,22 +26,28 @@ void partitionBefore(struct node **head, int target);
 int sumLists(struct node * head1, struct node * head2);
 int sumListsReversed(struct node * head1, struct node * head2);
 int isPalindrome(struct node * head);
+int isPalindromeWithStack(struct node * head);
+int pop(struct node** top);
+int push(struct node** top, int value);
+void printStack(struct node* top);
+
 
 int main(void){
 
 	struct node * pHead = NULL;
-	struct node  n1, n2, n3;
+	struct node  n1, n2, n3, n4;
 	n1.data = 1;
-	n2.data = 124; 
-	n3.data = 1;
+	n2.data = 2; 
+	n3.data = 2;
+	n4.data = 1;
 
 	pHead = &n1;
 	n1.pNext = &n2;
 	n2.pNext = &n3;
-	n3.pNext = NULL;
-
-	int result = isPalindrome(pHead); 
-	printf("%d is your result\n", result);
+	n3.pNext = &n4;
+	n4.pNext = NULL;
+	int result = isPalindromeWithStack(pHead);
+	printf("your result is %d\n", result);
 	return 0;
 }
 
@@ -376,4 +382,71 @@ int isPalindrome(struct node * head){
 	}
 	retval = 1;
 	return retval;
+}
+
+int isPalindromeWithStack(struct node * head){
+	struct node * runner, * slow;
+	slow = head;
+	runner = head;
+
+	// declare the stack
+	struct node * stackTop = NULL;
+	while(runner != NULL && runner->pNext){
+		push(&stackTop ,slow->data);
+		runner = (runner->pNext)->pNext;
+		slow = slow->pNext;
+	}
+
+	if(runner != NULL){
+		slow = slow->pNext;
+	}
+	while (slow != NULL){
+		if(!(pop(&stackTop) == slow->data)){
+			return 0;
+		}
+		slow = slow->pNext;		
+	}
+	return 1;
+}
+
+/*
+	stack related functions ... usable in applications of other
+	data structures and alogorithms
+*/
+int push(struct node** top, int value){
+	int retval = 0;
+	struct node* ptrNew = (struct node*) malloc(sizeof(struct node));
+	if(ptrNew){ // if allocated successfully
+		ptrNew->data = value;
+		ptrNew->pNext = *top; //whatever the top is looking at
+		*top = ptrNew;
+		retval = 1;
+	} else {
+		printf("%d not pushed, memory allocation failed!\n", value);
+	}
+	return retval;
+}
+
+
+int pop(struct node** top){
+	int retval = -1;
+	struct node * pTemp = *top;
+	*top = pTemp->pNext;
+	retval = pTemp->data;
+	free(pTemp);
+	return retval;
+}
+
+void printStack(struct node* top){
+	if (top == NULL){
+		puts("The stack is empty!");
+	} else {
+		puts("The stack is: ");
+		while(top != NULL){
+			printf(" %d -->", top->data);
+			top = top->pNext;
+		}	
+		printf(" NULL\n");
+	}
+	
 }
