@@ -41,3 +41,14 @@ NOTE THAT: this function only works on true circular linked lists. not linked li
 
 #2 the cell/node with multiple pointers pointing to it is the beginning of the loop.
 
+
+
+----------------------------------- special pointers ----------------------------------------
+
+#1 the fast runner / slow runner technique of traversing a whole linked list (single) could be used to determine the middle of a linked list and find its length (those 2 things we need).
+
+#2 when facing a problem and trying to optimize a solution, ask yourself: "Is there a data structure that could help me? / If I am to use the x data structure, how would go about doing that?"
+
+	those questions will enable you to find an elegant solution real quick.
+
+#3 ptr++ that gets you to the next step of your array doesn't work here because you're incrementing the memory contigiouly. When you do this to linked lists, you are accessing a point in memory that doesn' have a node of your type (linked lists arent' contigious).

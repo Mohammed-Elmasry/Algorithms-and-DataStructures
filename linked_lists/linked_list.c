@@ -25,51 +25,23 @@ void deleteFromMid(struct node * target);
 void partitionBefore(struct node **head, int target);
 int sumLists(struct node * head1, struct node * head2);
 int sumListsReversed(struct node * head1, struct node * head2);
+int isPalindrome(struct node * head);
 
 int main(void){
 
 	struct node * pHead = NULL;
-	
-	// append(&pHead, 'C');
-	// append(&pHead, 'C');
-	// append(&pHead, 'Z');
-	// append(&pHead, 'A');
-	// append(&pHead, 'N');
-	// append(&pHead, 'S');	
-	// append(&pHead, 'P');	
-	// append(&pHead, 'Z');
-	// append(&pHead, 'L');	
-	// append(&pHead, 'L');	
-	// append(&pHead, 'S');
-	// append(&pHead, 'H');
-	// append(&pHead, 'Q');
-	// append(&pHead, 'R');
-	// append(&pHead, 'T');
+	struct node  n1, n2, n3;
+	n1.data = 1;
+	n2.data = 124; 
+	n3.data = 1;
 
-	struct node n1, n2, n3, n4, n5, n6;
-	struct node * pHead2 = NULL;
-	n1.data = 3;
-	n2.data = 7;
-	n3.data = 5;
-	n4.data = 1;
-	n5.data = 2;
-	n6.data = 7;
-
+	pHead = &n1;
 	n1.pNext = &n2;
 	n2.pNext = &n3;
 	n3.pNext = NULL;
-	n4.pNext = &n5;
-	n5.pNext = &n6;
-	n6.pNext = NULL;
 
-	pHead = &n1;
-	pHead2 = &n4; 
-
-	printList(pHead);
-	// partitionBefore(&pHead, 5);
-	int sum = sumLists(pHead, pHead2);
-	printList(pHead2);
-	printf("%d is the sum\n", sum);
+	int result = isPalindrome(pHead); 
+	printf("%d is your result\n", result);
 	return 0;
 }
 
@@ -250,7 +222,6 @@ int getLength(struct node * head){
 }
 
 void MTF(struct node ** head, struct node * ptr){
-
 }
 
 void removeDuplicates(struct node ** head){
@@ -373,4 +344,36 @@ int sumLists(struct node * head1, struct node * head2){
 	puts("result reversed is: ");
 	printList(newHead);
 	return 0;
+}
+
+int isPalindrome(struct node * head){
+	int retval = 0;
+	int counter = 0;
+	struct node * ptr = head;
+	struct node * handler = NULL;
+	struct node * newHead = NULL;
+	while(ptr != NULL){
+		handler = (struct node *) malloc(sizeof(struct node));
+		if(handler){
+			handler->data = ptr->data;
+			handler->pNext = newHead;
+			newHead = handler;
+			counter++;
+			ptr = ptr->pNext;
+		} else {
+			printf("Memory allocation failed\n");
+			return -1;
+		}
+	}
+	puts("until here.. we're ok");
+	counter = counter / 2;
+	handler = newHead;
+	ptr = head;
+	for (int i = 0; i < counter; i++){
+		if(handler->data != ptr->data) {return retval;}
+		ptr++;
+		handler++;
+	}
+	retval = 1;
+	return retval;
 }
