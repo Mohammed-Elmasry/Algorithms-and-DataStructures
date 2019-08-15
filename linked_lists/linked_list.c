@@ -30,24 +30,28 @@ int isPalindromeWithStack(struct node * head);
 int pop(struct node** top);
 int push(struct node** top, int value);
 void printStack(struct node* top);
-
+struct node * isIntersected(struct node * head1, struct node * head2);
 
 int main(void){
 
-	struct node * pHead = NULL;
-	struct node  n1, n2, n3, n4;
+	struct node * pHead1 = NULL;
+	struct node * pHead2 = NULL;
+	struct node  n1, n2, n3, n4, n11;
 	n1.data = 1;
 	n2.data = 2; 
-	n3.data = 2;
+	n3.data = 5;
 	n4.data = 1;
+	n11.data = 9;
 
-	pHead = &n1;
+	pHead1 = &n1;
+	pHead2 = &n11;
 	n1.pNext = &n2;
 	n2.pNext = &n3;
 	n3.pNext = &n4;
 	n4.pNext = NULL;
-	int result = isPalindromeWithStack(pHead);
-	printf("your result is %d\n", result);
+	n11.pNext= &n3;
+	struct node * found = isIntersected(pHead1, pHead2);
+	printf("your result is %d\n", found->data);
 	return 0;
 }
 
@@ -448,5 +452,44 @@ void printStack(struct node* top){
 		}	
 		printf(" NULL\n");
 	}
+}
+
+struct node * isIntersected(struct node * head1, struct node * head2){
+	struct node * ptr1, *ptr2;
+	ptr1 = head1; ptr2 = head2;
+	int length1 = 0, length2 = 0;
+
+	while(ptr1 != NULL){
+		length1++;
+		ptr1 = ptr1->pNext;
+	}
+
+	while(ptr2 != NULL){
+		length2++;
+		ptr2 = ptr2->pNext;
+	}
 	
+	if(!(ptr1 == ptr2)){
+		return NULL;
+	}
+	ptr1 = head1; ptr2 = head2;
+
+	if(length1 > length2){
+		for(int i = 0; i < length1 - length2; i++){
+			ptr1 = ptr1->pNext;
+		}
+	} else {
+		for(int i = 0; i < length2 - length1; i++){
+			ptr2 = ptr2->pNext;
+
+		}
+	}
+
+	while(ptr1 != NULL && ptr2 != NULL){
+		if(ptr1 == ptr2){
+			return ptr1;
+		}
+		ptr1 = ptr1->pNext;
+		ptr2 = ptr2->pNext;
+	}
 }
