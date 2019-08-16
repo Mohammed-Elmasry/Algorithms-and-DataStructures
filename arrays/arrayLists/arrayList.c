@@ -2,39 +2,48 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct arrayList{
-	int * array;
-}typedef ArrayList;
+// struct arrayList{
+// 	int * array;
+// }typedef ArrayList;
 
 // prototypes
-void printList(ArrayList list, long unsigned int size);
-void expandByOne(ArrayList *list, long unsigned int size, int element);
+// int * expandByOne(int array[], long unsigned int size, long unsigned int size, int element);
+void printList(int list[], long unsigned int size);
+int length(int array[], long unsigned int size);
 
 
 int main(void){
-	ArrayList list; 
-	int array[5] = {1,3,5,2,6};
-	list.array = array;
-
-	// expandByOne(&list, 4);
-	expandByOne(&list, 5, 19);
-	
-	long unsigned int size = sizeof(list.array);
-	printf("size of arrayList is %lu\n", size);
-	printList(list, 5);
+	int array[5] = {1,2,4,6,2};
+	int result = length(array, sizeof(array));
+	printf("result is %d\n", result);
+	// long unsigned int size = sizeof(array);
+	// printList(array, 5);
+	// expandByOne(array, size, 19);
+	// long unsigned int length = size / sizeof(int);
+	// puts("after expansion: ");
+	// printList(array, 7);
+	// int * newArray; 
+	// expandByOne(array, length, 19);
+	// printf("%d\n", newArray[0]);
+	// puts("display complete...");
 	return 0;
 }
 
-void expandByOne(ArrayList *list, long unsigned int size, int element){
-	int * ptr = (int *) malloc(sizeof(int) * (size + 1));
-	memcpy(ptr, list->array, size);
+// int * expandByOne(int array[], int length, long unsigned int size, int element){
+// 	int length = size / sizeof(int);
+// 	int * ptr = (int *) malloc(sizeof(int) * (length + 1));
+// 	memcpy(ptr, array, size);
 
-	ptr[size+1] = element;
-	list->array = ptr;
+// 	ptr[length+1] = element;
+// 	return ptr;
+// }
+
+void printList(int list[], long unsigned int size){
+	for(int i = 0; i < size; ++i){
+		printf("%d\n", list[i]);
+	}
 }
 
-void printList(ArrayList list, long unsigned int size){
-	for(int i = 0; i < size; ++i){
-		printf("%d\n", list.array[i]);
-	}
+int length(int array[], long unsigned int size){
+	return size / sizeof(int);
 }
