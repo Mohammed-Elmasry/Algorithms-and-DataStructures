@@ -7,36 +7,33 @@
 // }typedef ArrayList;
 
 // prototypes
-// int * expandByOne(int array[], long unsigned int size, long unsigned int size, int element);
 void printList(int list[], long unsigned int size);
 int length(int array[], long unsigned int size);
+int * expandByOne(int array[], long unsigned int size, int element);
 
 
 int main(void){
-	int array[5] = {1,2,4,6,2};
-	int result = length(array, sizeof(array));
-	printf("result is %d\n", result);
-	// long unsigned int size = sizeof(array);
-	// printList(array, 5);
-	// expandByOne(array, size, 19);
-	// long unsigned int length = size / sizeof(int);
-	// puts("after expansion: ");
-	// printList(array, 7);
-	// int * newArray; 
-	// expandByOne(array, length, 19);
-	// printf("%d\n", newArray[0]);
-	// puts("display complete...");
+	int array[] = {1,2,4,6,2};
+	// length(array, sizeof(array));
+	
+	int * newArray;
+	newArray = expandByOne(array, sizeof(array), 19);
+	printf("size is %lu\n",sizeof(newArray));
+	for (int i = 0; i < 6; ++i){
+		printf("element number %d is %d\n", i+1, newArray[i]);
+	}
+	puts("display complete...");
 	return 0;
 }
 
-// int * expandByOne(int array[], int length, long unsigned int size, int element){
-// 	int length = size / sizeof(int);
-// 	int * ptr = (int *) malloc(sizeof(int) * (length + 1));
-// 	memcpy(ptr, array, size);
+int * expandByOne(int array[], long unsigned int size, int element){
+	int length = size / sizeof(int);
+	int * ptr = (int *) malloc(size + sizeof(int));
+	memcpy(ptr, array, size);
 
-// 	ptr[length+1] = element;
-// 	return ptr;
-// }
+	ptr[length] = element;
+	return ptr;
+}
 
 void printList(int list[], long unsigned int size){
 	for(int i = 0; i < size; ++i){
@@ -45,5 +42,7 @@ void printList(int list[], long unsigned int size){
 }
 
 int length(int array[], long unsigned int size){
-	return size / sizeof(int);
+	int result = size / sizeof(int);
+	printf("result is %d\n", result);
+	return result;
 }
