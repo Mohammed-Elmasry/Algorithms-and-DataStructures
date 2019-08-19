@@ -6,6 +6,7 @@
 struct intArrayList {
 	int * arrayPtr;
 	int length;
+	int count;
 };
 
 //prototypes
@@ -34,15 +35,17 @@ int main(void){
 	puts("AND....");
 	appendIntArrayList(&list, 19);
 	printArrayList(list);
+
+
 	return 0;
 }
-
-int assignIntList(struct intArrayList * list, int * array, int arraySize){
+int assignIntList(struct intArrayList * list, int * array, int arraySize, int arrayElementCount){
 	int retval = 0;
 	list->arrayPtr = (int *) malloc(arraySize * sizeof(int));
 	if(list->arrayPtr){
 		memcpy(list->arrayPtr,array,sizeof(int) * arraySize);
 		list->length = arraySize;
+		list->count = arrayElementCount;
 		retval = 1;
 	} else {
 		strerror(ENOMEM);
