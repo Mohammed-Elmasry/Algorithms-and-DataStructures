@@ -68,7 +68,6 @@ void printArrayListElements(struct intArrayList list){
 		printf("%d ", list.arrayPtr[i]);
 	}
 	puts("display complete...");
-	printf("length of array is: %d\n", list.length);
 	printf("count of elements is: %d\n", list.count);
 }
 
