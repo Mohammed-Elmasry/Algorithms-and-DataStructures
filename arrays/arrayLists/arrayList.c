@@ -17,13 +17,15 @@ int main(void){
 	// length(array, sizeof(array));
 	
 	int * newArray;
-	newArray = reduceByOne(array, sizeof(array), 3);
+	newArray = array;
+	printf("%lu\n", sizeof(*newArray));
+	// newArray = reduceByOne(array, sizeof(array), 3);
 	// newArray = expandByOne(array, sizeof(array), 19);
 	// printf("size is %lu\n",sizeof(newArray));
-	for (int i = 0; i < 4; ++i){
-		printf("element number %d is %d\n", i+1, newArray[i]);
-	}
-	puts("display complete...");
+	// for (int i = 0; i < 4; ++i){
+		// printf("element number %d is %d\n", i+1, newArray[i]);
+	// }
+	// puts("display complete...");
 	return 0;
 }
 

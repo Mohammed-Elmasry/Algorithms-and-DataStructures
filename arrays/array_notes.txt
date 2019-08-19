@@ -1,3 +1,15 @@
 #1 when dealing with length of array passed to a function, you'll need to pass the size of the array to the function because the parameter representing the array is actually a pointer and so it is not representative of the real size of the array.
 
 #2 a pointer on linux takes 8 bytes disregarding its data type.
+
+---------------------------------- arrayLists ----------------------------------------
+
+#1 to define a structure for arrayList, use a pointer to integer inside a structure.
+NOTE THAT: THIS WILL ENABLE THIS POINTER TO POINT TO DIFFERENT DYNAMICALLY ALLOCATED ARRAYS 
+CREATED INSIDE THE EXTENSION FUNCTIONS.
+
+USING A REAL ARRAY INSIDE THE STRUCTURE WILL HINDER THE RESIZE AND REASSIGNMENT (because arrays cannot be assigned).
+
+#2 if a pointer is declared a member in a struct and the struct doesn't have any other members, the default value of the pointer is NULL.
+
+#3
