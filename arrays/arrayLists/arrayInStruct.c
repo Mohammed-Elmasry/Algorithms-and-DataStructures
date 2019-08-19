@@ -10,7 +10,7 @@ struct intArrayList {
 };
 
 //prototypes
-int assignIntList(struct intArrayList * list, int * array, int arraySize);
+int assignIntList(struct intArrayList * list, int * array, int arraySize, int arrayElementCount);
 void printArrayList(struct intArrayList list);
 int appendIntArrayList(struct intArrayList * list, int value);
 void printArrayListElements(struct intArrayList list);
@@ -24,7 +24,7 @@ int main(void){
 	puts("before assignment...");
 	printf("%d\n", list.length);
 
-	assignIntList(&list, array, size);
+	assignIntList(&list, array, size, size);
 	puts("after assignment...");
 	printArrayList(list);
 	printf("\n\n\n");
@@ -37,6 +37,21 @@ int main(void){
 	appendIntArrayList(&list, 19);
 	printArrayList(list);
 
+	puts("AND....");
+	appendIntArrayList(&list, 19);
+	printArrayList(list);
+
+	puts("AND....");
+	appendIntArrayList(&list, 19);
+	printArrayList(list);
+
+	puts("AND....");
+	appendIntArrayList(&list, 19);
+	printArrayList(list);
+
+	puts("AND....");
+	appendIntArrayList(&list, 19);
+	printArrayList(list);
 
 	return 0;
 }
@@ -73,23 +88,29 @@ void printArrayListElements(struct intArrayList list){
 
 int appendIntArrayList(struct intArrayList * list, int value){
 	int retval = 0;
-	if(list != NULL){ // list is empty
-		int old_length = list->length;
-		// free(list->arrayPtr);
-		// free(list->arrayPtr);
-		int * temp = (int *) malloc(sizeof(int) * list->length * 2);
-		if(temp != NULL){
-			puts("Debug appendIntArrayList memory allocation done(1)");
-			memcpy(temp, list->arrayPtr, (sizeof(int) * list->length));
-			temp[list->length] = value;
-			free(list->arrayPtr);
-			list->arrayPtr = temp;
-			list->length = old_length * 2;
-			retval = 1;
+	if(list != NULL){ // list is not empty
+		if(list->count < list->length){ // there is still space
+			list->arrayPtr[list->count] = value;
+			list->count++;
 		} else {
-			strerror(ENOMEM);
-			retval = errno;
+			int old_length = list->length;
+			int old_count = list->count;
+			int * temp = (int *) malloc(sizeof(int) * list->length * 2);
+			if(temp != NULL){
+				puts("Debug appendIntArrayList memory allocation done(1)");
+				memcpy(temp, list->arrayPtr, (sizeof(int) * list->length));
+				temp[list->length] = value;
+				free(list->arrayPtr);
+				list->arrayPtr = temp;
+				list->length = old_length * 2;
+				list->count = ++old_count;
+				retval = 1;
+			} else {
+				strerror(ENOMEM);
+				retval = errno;
+			}
 		}
+		
 	}
 	return retval;
 }
