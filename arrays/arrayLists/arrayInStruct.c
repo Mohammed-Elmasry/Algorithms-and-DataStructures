@@ -14,6 +14,7 @@ int assignIntList(struct intArrayList * list, int * array, int arraySize, int ar
 void printArrayList(struct intArrayList list);
 int appendIntArrayList(struct intArrayList * list, int value);
 void printArrayListElements(struct intArrayList list);
+int * expandAndCopy(struct intArrayList list);
 
 
 int main(void){
@@ -95,22 +96,26 @@ int appendIntArrayList(struct intArrayList * list, int value){
 		} else {
 			int old_length = list->length;
 			int old_count = list->count;
-			int * temp = (int *) malloc(sizeof(int) * list->length * 2);
-			if(temp != NULL){
-				puts("Debug appendIntArrayList memory allocation done(1)");
-				memcpy(temp, list->arrayPtr, (sizeof(int) * list->length));
-				temp[list->length] = value;
-				free(list->arrayPtr);
-				list->arrayPtr = temp;
-				list->length = old_length * 2;
-				list->count = ++old_count;
-				retval = 1;
-			} else {
-				strerror(ENOMEM);
-				retval = errno;
-			}
+			int * temp = expandAndCopy(*list);
+			temp[list->length] = value;
+			free(list->arrayPtr);
+			list->arrayPtr = temp;
+			list->length = old_length * 2;
+			list->count = ++old_count;
+			retval = 1;
 		}
-		
 	}
 	return retval;
+}
+
+int * expandAndCopy(struct intArrayList list){
+	int * temp = (int *) malloc(sizeof(int) * list.length * 2);
+	if(temp != NULL){
+		puts("Debug expandAndCopy memory allocation done(1)");
+		memcpy(temp, list.arrayPtr, (sizeof(int) * list.length));
+	} else {
+		strerror(ENOMEM);
+		return NULL;
+	}	
+	return temp;
 }
