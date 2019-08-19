@@ -8,6 +8,7 @@ struct intArrayList {
 
 //prototypes
 void assignIntList(struct intArrayList * list, int * array, int arraySize);
+void printArrayList(struct intArrayList list);
 
 int main(void){
 	int array[5] = {1,5,6,9,11};
@@ -19,7 +20,7 @@ int main(void){
 
 	assignIntList(&list, array, size);
 	puts("after assignment...");
-	printf("%d\n", list.length);
+	printArrayList(list);
 	return 0;
 }
 
@@ -28,7 +29,10 @@ void assignIntList(struct intArrayList * list, int * array, int arraySize){
 	list->length = arraySize;
 }
 
-// void printArrayList(struct intArrayList list){
-// 	printf("%p\n", intArrayList.arrayPtr);
-// 	printf("%d\n", intArrayList.length);
-// }
+void printArrayList(struct intArrayList list){
+	for (int i = 0; i < list.length; ++i){	
+		printf("%d ", list.arrayPtr[i]);
+	}
+	puts("display complete..");
+	printf("length of arrayList is: %d\n", list.length);
+}
