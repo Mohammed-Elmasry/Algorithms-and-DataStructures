@@ -15,45 +15,20 @@ void printArrayList(struct intArrayList list);
 int appendIntArrayList(struct intArrayList * list, int value);
 void printArrayListElements(struct intArrayList list);
 int * expandAndCopy(struct intArrayList list);
+void swapRight(struct intArrayList * list, unsigned int index);
 
 
 int main(void){
 	int array[5] = {1,5,6,9,11};
 	struct intArrayList list;	
-	list.arrayPtr = array;
 	long unsigned int size = sizeof(array) / sizeof(int);
-	puts("before assignment...");
-	printf("%d\n", list.length);
-
+	
 	assignIntList(&list, array, size, size);
-	puts("after assignment...");
-	printArrayList(list);
-	printf("\n\n\n");
-	puts("THEN....");
-
-	appendIntArrayList(&list, 19);
-	printArrayList(list);
-	printf("\n\n\n\n");
-	puts("AND....");
-	appendIntArrayList(&list, 19);
-	printArrayList(list);
-
-	puts("AND....");
-	appendIntArrayList(&list, 19);
-	printArrayList(list);
-
-	puts("AND....");
-	appendIntArrayList(&list, 19);
-	printArrayList(list);
-
-	puts("AND....");
-	appendIntArrayList(&list, 19);
-	printArrayList(list);
-
-	puts("AND....");
-	appendIntArrayList(&list, 19);
-	printArrayList(list);
-
+	puts("before swap...");
+	printArrayListElements(list);	
+	swapRight(&list, 2);
+	puts("after swap");
+	printArrayListElements(list);
 	return 0;
 }
 int assignIntList(struct intArrayList * list, int * array, int arraySize, int arrayElementCount){
@@ -118,4 +93,12 @@ int * expandAndCopy(struct intArrayList list){
 		return NULL;
 	}	
 	return temp;
+}
+
+
+//* note that this can increase the count of a list.
+void swapRight(struct intArrayList * list, unsigned int index){
+	for (int i = list->length - 2; i > index-1; --i){
+		list->arrayPtr[i+1] = list->arrayPtr[i];
+	}
 }
