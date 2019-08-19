@@ -13,6 +13,7 @@ struct intArrayList {
 int assignIntList(struct intArrayList * list, int * array, int arraySize);
 void printArrayList(struct intArrayList list);
 int appendIntArrayList(struct intArrayList * list, int value);
+void printArrayListElements(struct intArrayList list);
 
 
 int main(void){
@@ -60,6 +61,15 @@ void printArrayList(struct intArrayList list){
 	}
 	puts("display complete..");
 	printf("length of arrayList is: %d\n", list.length);
+}
+
+void printArrayListElements(struct intArrayList list){
+	for(int i = 0; i < list.count;++i){
+		printf("%d ", list.arrayPtr[i]);
+	}
+	puts("display complete...");
+	printf("length of array is: %d\n", list.length);
+	printf("count of elements is: %d\n", list.count);
 }
 
 int appendIntArrayList(struct intArrayList * list, int value){
