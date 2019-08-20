@@ -18,14 +18,33 @@ int * expandAndCopy(struct intArrayList list);
 void swapRight(struct intArrayList * list, int index);
 int insertIntoArrayList(struct intArrayList * list, unsigned int index, int value);
 int * contractAndCopy(struct intArrayList list);
+int pop(struct intArrayList * list);
 
 
 int main(void){
-	int array[3] = {1,5,6};
+	int array[4] = {1,5,6,11};
 	struct intArrayList list;	
 	long unsigned int size = sizeof(array) / sizeof(int);
 	
+	
 	assignIntList(&list, array, size, size);
+	puts("before popping....");
+	printArrayListElements(list);
+	int result = pop(&list);
+	
+	puts("popping result....");	
+	printf("your result is: %d\n", result);
+	printf("\n\n\n");
+	printArrayListElements(list);
+
+	printf("\n\n\n");
+	puts("Phase 2");
+	result = pop(&list);
+	puts("popping result....");	
+	printf("your result is: %d\n", result);
+	// printf("\n\n\n");
+	printArrayList(list);
+
 
 	return 0;
 }
@@ -129,14 +148,18 @@ int insertIntoArrayList(struct intArrayList * list, unsigned int index, int valu
 int pop(struct intArrayList * list){
 	int retval = -1;
 	if(list->arrayPtr != NULL){
-		if(list->count-1 <= list->length){
-			// contractAndCopy()
-			// length is halved
+		if(list->count-1 <= list->length/2){
+			int * temp;
+			retval = list->arrayPtr[list->count-1]; 
+			temp = contractAndCopy(*list);
+			free(list->arrayPtr);
+			list->arrayPtr = temp;
+			list->length = list->length / 2;
 		} else {
-			retval = [list->count-1];
+			retval = list->arrayPtr[list->count-1];
 			list->arrayPtr[list->count-1] = 0;
-			list->count--;
 		}
+		list->count--;
 	}
 	return retval;
 }
