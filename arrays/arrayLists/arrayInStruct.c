@@ -28,23 +28,6 @@ int main(void){
 	
 	
 	assignIntList(&list, array, size, size);
-	puts("before popping....");
-	printArrayListElements(list);
-	int result = pop(&list);
-	
-	puts("popping result....");	
-	printf("your result is: %d\n", result);
-	printf("\n\n\n");
-	printArrayListElements(list);
-
-	printf("\n\n\n");
-	puts("Phase 2");
-	result = pop(&list);
-	puts("popping result....");	
-	printf("your result is: %d\n", result);
-	// printf("\n\n\n");
-	printArrayList(list);
-
 
 	return 0;
 }
