@@ -93,7 +93,6 @@ int appendIntArrayList(struct intArrayList * list, int value){
 int * expandAndCopy(struct intArrayList list){
 	int * temp = (int *) malloc(sizeof(int) * list.length * 2);
 	if(temp != NULL){
-		puts("Debug expandAndCopy memory allocation done(1)");
 		memcpy(temp, list.arrayPtr, (sizeof(int) * list.length));
 	} else {
 		strerror(ENOMEM);
@@ -105,14 +104,10 @@ int * expandAndCopy(struct intArrayList list){
 
 //* note that this can increase the count of a list.
 void swapRight(struct intArrayList * list, int index){
-	puts("ATTENTION::....swap function fired");
 	int i = list->length - 2;
-	printf("current i is : %d\n", i);
 	for (; i > index-1; --i){
-		printf("current i is : %d\n", i);
 		list->arrayPtr[i+1] = list->arrayPtr[i];
 	}
-	printf("current i is : %d\n", i);
 }
 
 int insertIntoArrayList(struct intArrayList * list, unsigned int index, int value){
@@ -130,7 +125,6 @@ int insertIntoArrayList(struct intArrayList * list, unsigned int index, int valu
 			list->length = old_length * 2;
 			free(list->arrayPtr);
 			list->arrayPtr = temp;
-			puts("entering swapRight() function");
 			swapRight(list, index);
 			list->arrayPtr[index] = value;	
 			list->count = ++old_count;
