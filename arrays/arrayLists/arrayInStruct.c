@@ -15,23 +15,23 @@ void printArrayList(struct intArrayList list);
 int appendIntArrayList(struct intArrayList * list, int value);
 void printArrayListElements(struct intArrayList list);
 int * expandAndCopy(struct intArrayList list);
-void swapRight(struct intArrayList * list, unsigned int index);
+void swapRight(struct intArrayList * list, int index);
 int insertIntoArrayList(struct intArrayList * list, unsigned int index, int value);
 
 
 int main(void){
-	int array[5] = {1,5,6,9,11};
+	int array[3] = {1,5,6};
 	struct intArrayList list;	
 	long unsigned int size = sizeof(array) / sizeof(int);
 	
 	assignIntList(&list, array, size, size);
 	puts("before insertion...");
-	printArrayListElements(list);
+	printArrayList(list);
 
-	insertIntoArrayList(&list, 2, 51);
+	insertIntoArrayList(&list, 0, 51);
 	
 	puts("after insertion");
-	printArrayListElements(list);
+	printArrayList(list);
 	
 
 	return 0;
@@ -104,10 +104,15 @@ int * expandAndCopy(struct intArrayList list){
 
 
 //* note that this can increase the count of a list.
-void swapRight(struct intArrayList * list, unsigned int index){
-	for (int i = list->length - 2; i > index-1; --i){
+void swapRight(struct intArrayList * list, int index){
+	puts("ATTENTION::....swap function fired");
+	int i = list->length - 2;
+	printf("current i is : %d\n", i);
+	for (; i > index-1; --i){
+		printf("current i is : %d\n", i);
 		list->arrayPtr[i+1] = list->arrayPtr[i];
 	}
+	printf("current i is : %d\n", i);
 }
 
 int insertIntoArrayList(struct intArrayList * list, unsigned int index, int value){
@@ -125,11 +130,11 @@ int insertIntoArrayList(struct intArrayList * list, unsigned int index, int valu
 			list->length = old_length * 2;
 			free(list->arrayPtr);
 			list->arrayPtr = temp;
+			puts("entering swapRight() function");
 			swapRight(list, index);
 			list->arrayPtr[index] = value;	
 			list->count = ++old_count;
 			retval = 1;
-			
 		}
 	}
 	return retval;
