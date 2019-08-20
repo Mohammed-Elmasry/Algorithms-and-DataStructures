@@ -17,6 +17,7 @@ void printArrayListElements(struct intArrayList list);
 int * expandAndCopy(struct intArrayList list);
 void swapRight(struct intArrayList * list, int index);
 int insertIntoArrayList(struct intArrayList * list, unsigned int index, int value);
+int * contractAndCopy(struct intArrayList list);
 
 
 int main(void){
@@ -25,14 +26,6 @@ int main(void){
 	long unsigned int size = sizeof(array) / sizeof(int);
 	
 	assignIntList(&list, array, size, size);
-	puts("before insertion...");
-	printArrayList(list);
-
-	insertIntoArrayList(&list, 0, 51);
-	
-	puts("after insertion");
-	printArrayList(list);
-	
 
 	return 0;
 }
@@ -101,7 +94,6 @@ int * expandAndCopy(struct intArrayList list){
 	return temp;
 }
 
-
 //* note that this can increase the count of a list.
 void swapRight(struct intArrayList * list, int index){
 	int i = list->length - 2;
@@ -132,4 +124,30 @@ int insertIntoArrayList(struct intArrayList * list, unsigned int index, int valu
 		}
 	}
 	return retval;
+}
+
+int pop(struct intArrayList * list){
+	int retval = -1;
+	if(list->arrayPtr != NULL){
+		if(list->count-1 <= list->length){
+			// contractAndCopy()
+			// length is halved
+		} else {
+			retval = [list->count-1];
+			list->arrayPtr[list->count-1] = 0;
+			list->count--;
+		}
+	}
+	return retval;
+}
+
+int * contractAndCopy(struct intArrayList list){
+	int * temp = (int *) malloc(sizeof(int) * list.length / 2);
+	if(temp != NULL){
+		memcpy(temp, list.arrayPtr, (sizeof(int) * list.length) / 2);
+	} else {
+		strerror(ENOMEM);
+		return NULL;
+	}	
+	return temp;
 }
