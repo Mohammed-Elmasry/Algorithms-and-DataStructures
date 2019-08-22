@@ -19,6 +19,8 @@ void swapRight(struct intArrayList * list, int index);
 int insertIntoArrayList(struct intArrayList * list, unsigned int index, int value);
 int * contractAndCopy(struct intArrayList list);
 int pop(struct intArrayList * list);
+void swapLeft(struct intArrayList * list, int index);
+int removeFromArrayList(struct intArrayList * list, unsigned int index);
 
 
 int main(void){
@@ -28,6 +30,13 @@ int main(void){
 	
 	
 	assignIntList(&list, array, size, size);
+	printArrayListElements(list);
+	removeFromArrayList(&list, 0);
+
+	printArrayListElements(list);
+	removeFromArrayList(&list, 0);
+
+	printArrayListElements(list);
 
 	return 0;
 }
@@ -159,26 +168,25 @@ int * contractAndCopy(struct intArrayList list){
 }
 
 
-int insertIntoArrayList(struct intArrayList * list, unsigned int index, int value){
+int removeFromArrayList(struct intArrayList * list, unsigned int index){
 	int retval = 0;
 	if(list != NULL){
-		if(list->count < list->length){
-			swapRight(list, index);
-			list->arrayPtr[index] = value;
-			list->count++;
-		} else {
+		if(list->count - 1 <= list->length / 2){
 			int * temp;
 			int old_length = list->length;
 			int old_count = list->count;
-			temp = expandAndCopy(*list);
-			list->length = old_length * 2;
+			swapLeft(list, index);
+			temp = contractAndCopy(*list);
 			free(list->arrayPtr);
 			list->arrayPtr = temp;
-			swapRight(list, index);
-			list->arrayPtr[index] = value;	
-			list->count = ++old_count;
-			retval = 1;
+			list->length = old_length / 2;
+			list->count = old_count - 1;
+		} else {
+			swapLeft(list, index);
+			list->arrayPtr[list->count-1] = 0;
+			list->count--;
 		}
+		retval = 1;
 	}
 	return retval;
 }
