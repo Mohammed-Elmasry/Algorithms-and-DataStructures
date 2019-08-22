@@ -157,3 +157,38 @@ int * contractAndCopy(struct intArrayList list){
 	}	
 	return temp;
 }
+
+
+int insertIntoArrayList(struct intArrayList * list, unsigned int index, int value){
+	int retval = 0;
+	if(list != NULL){
+		if(list->count < list->length){
+			swapRight(list, index);
+			list->arrayPtr[index] = value;
+			list->count++;
+		} else {
+			int * temp;
+			int old_length = list->length;
+			int old_count = list->count;
+			temp = expandAndCopy(*list);
+			list->length = old_length * 2;
+			free(list->arrayPtr);
+			list->arrayPtr = temp;
+			swapRight(list, index);
+			list->arrayPtr[index] = value;	
+			list->count = ++old_count;
+			retval = 1;
+		}
+	}
+	return retval;
+}
+
+
+void swapLeft(struct intArrayList * list, int index){
+	if(list != NULL){
+		while(index < list->count - 1){
+			list->arrayPtr[index] = list->arrayPtr[index + 1];
+			index++;
+		}	
+	}
+}
