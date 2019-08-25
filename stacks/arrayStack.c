@@ -11,16 +11,22 @@ int pop(struct ArrayStack * stack);
 int hasNext(struct ArrayStack stack);
 void printStack(struct ArrayStack stack);
 int push (struct ArrayStack * stack, int element);
+void transferStack(struct ArrayStack * source, struct ArrayStack * destination);
 
 
 int main(void){
-	struct  ArrayStack stack = {{}, 0};
-
+	struct ArrayStack stack = {{}, 0};
+	struct ArrayStack target = {{}, 0};
 	int result;
-	push(&stack, 18);
-	result = hasNext(stack);
-	printf("result is %d\n", result);
-	printStack(stack);
+	push(&stack, 1);
+	push(&stack, 2);
+	push(&stack, 3);
+	push(&stack, 4);
+
+
+	transferStack(&stack, &target);
+
+	printStack(target);
 	return 0;
 }
 
@@ -56,4 +62,10 @@ int pop(struct ArrayStack * stack){
 
 int hasNext(struct ArrayStack stack){
 	return stack.top;
+}
+
+void transferStack(struct ArrayStack * source, struct ArrayStack * destination){
+	while(hasNext(*source)){
+		push(destination, pop(source));
+	}
 }
