@@ -12,27 +12,26 @@ int hasNext(struct ArrayStack stack);
 void printStack(struct ArrayStack stack);
 int push (struct ArrayStack * stack, int element);
 void transferStack(struct ArrayStack * source, struct ArrayStack * destination);
+void stackInsertionSort(struct ArrayStack * stack);
 
 
 int main(void){
 	struct ArrayStack stack = {{}, 0};
-	struct ArrayStack target = {{}, 0};
 	int result;
-	push(&stack, 1);
+	push(&stack, 5);
 	push(&stack, 2);
-	push(&stack, 3);
+	push(&stack, 1);
 	push(&stack, 4);
 
+	stackInsertionSort(&stack);
 
-	transferStack(&stack, &target);
-
-	printStack(target);
+	printStack(stack);
 	return 0;
 }
 
 int push (struct ArrayStack * stack, int element){
 	int retval = 0;
-	if(stack->top <= 4){
+	if(stack->top < 5){
 		stack->arr[stack->top] = element;
 		stack->top++;
 		retval = 1;
@@ -67,5 +66,24 @@ int hasNext(struct ArrayStack stack){
 void transferStack(struct ArrayStack * source, struct ArrayStack * destination){
 	while(hasNext(*source)){
 		push(destination, pop(source));
+	}
+}
+
+void stackInsertionSort(struct ArrayStack * stack){
+	struct ArrayStack array = {{}, 0};
+	int temp;
+	for (int i = stack->top; i > 0; i--){
+		temp = pop(stack);
+		transferStack(stack, &array);
+		for(int x = array.top; x > 0; x--){
+			int current = pop(&array);
+			if(temp < current){
+				push(stack, temp);
+				push(stack, current);
+				transferStack(&array, stack);
+			} else {
+				push(stack, current);
+			}
+		}
 	}
 }
