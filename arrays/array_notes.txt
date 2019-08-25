@@ -12,4 +12,10 @@ USING A REAL ARRAY INSIDE THE STRUCTURE WILL HINDER THE RESIZE AND REASSIGNMENT 
 
 #2 if a pointer is declared a member in a struct and the struct doesn't have any other members, the default value of the pointer is NULL.
 
-#3
+------------------------------------ Sparse Arrays -----------------------------------
+
+#1 sparse arrays are arrays/linked lists/arrayLists of arrays that are allocated to fit the required data. Consider a 2d array[2][2], it will create 4 places in a 4 X 4 structure.
+
+if you need only 1 item in the first row and 2 items in the second row, you'll be wasting some memory allocated for the second place in row one for example
+
+a sparse array would only allocate an array to store entries to other arrays and each of the latter would hold a certain set of values. (the array would be fitting the specific size of the required values).
