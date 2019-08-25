@@ -8,21 +8,17 @@ struct ArrayStack {
 
 //prototypes
 int pop(struct ArrayStack * stack);
-int push (struct ArrayStack * stack, int element);
+int hasNext(struct ArrayStack stack);
 void printStack(struct ArrayStack stack);
+int push (struct ArrayStack * stack, int element);
 
 
 int main(void){
 	struct  ArrayStack stack = {{}, 0};
-	push(&stack, 3);
-	push(&stack, 5);
-	push(&stack, 1);
-	push(&stack, 4);
-	push(&stack, 2);
 
-	int result = pop(&stack);
-	result = pop(&stack);
-
+	int result;
+	push(&stack, 18);
+	result = hasNext(stack);
 	printf("result is %d\n", result);
 	printStack(stack);
 	return 0;
@@ -56,4 +52,8 @@ int pop(struct ArrayStack * stack){
 		puts("stack is empty!");
 	}
 	return retval;
+}
+
+int hasNext(struct ArrayStack stack){
+	return stack.top;
 }
