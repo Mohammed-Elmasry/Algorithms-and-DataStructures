@@ -36,25 +36,21 @@ int main(void){
 
 
 int push (struct DoubleStack * stack, char c, char * flag){
-	int retval = 0;
 	if(flag == "left"){
 		if(stack->topLeft < (stack->size) / 2){
 			stack->arr[stack->topLeft] = c;
 			stack->topLeft++;
-			retval = 1;	
-		} else {
-			puts("top of stack reached!");
-			retval = 0;
-		}		
+			return  1;	
+		}
+		puts("left top of stack reached!");
+		return 0;	
 	} else {
 		if(stack->topRight >= (stack->size) / 2){
 			stack->arr[stack->topRight] = c;
 			stack->topRight--;
-			retval = 1;	
-		} else {
-			puts("right top of stack reached!");
-			retval = 0;
+			return 1;	
 		}
+		puts("right top of stack reached!");
+		return 0;
 	}
-	return retval;
 }
