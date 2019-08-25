@@ -22,7 +22,12 @@ int main(void){
 	push(&stack, 'P', "left");
 	push(&stack, 'L', "left");
 	push(&stack, 'E', "left");
-	push(&stack, 'A', "left");
+	push(&stack, 'A', "Right");
+	push(&stack, 'A', "Right");
+	push(&stack, 'A', "Right");
+	push(&stack, 'A', "Right");
+	push(&stack, 'A', "Right");
+	push(&stack, 'A', "Right");
 
 	printf("%c\n", stack.arr[0]);
 	return 0;
@@ -47,7 +52,7 @@ int push (struct DoubleStack * stack, char c, char * flag){
 			stack->topRight--;
 			retval = 1;	
 		} else {
-			puts("top of stack reached!");
+			puts("right top of stack reached!");
 			retval = 0;
 		}
 	}
