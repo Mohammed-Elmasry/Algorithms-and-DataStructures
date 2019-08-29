@@ -7,7 +7,7 @@ struct Queue {
 };
 
 //prototypes
-int dequeue(struct Queue * que);
+int dequeue(struct Queue * que, unsigned int size);
 void swapLeft(struct Queue * que, unsigned int size);
 void printQueue(struct Queue que, unsigned int size);
 void initializeQueue(struct Queue * que, unsigned int size);
@@ -25,9 +25,14 @@ int main(int argc, char * argv[]){
 	enqueue(&q, 3, length);
 	enqueue(&q, 2, length);
 	enqueue(&q, 1, length);
-	enqueue(&q, 0, length);
 
+	puts("before dequeue");
 	printQueue(q, length);
+
+	puts("after dequeue...");
+	dequeue(&q,length);
+	enqueue(&q, 0, length);
+	printQueue(q,length);
 	return 0;
 }
 
@@ -45,10 +50,12 @@ int enqueue(struct Queue * que, int element, unsigned int size){
 	return retval;
 }
 
-int dequeue(struct Queue * que){
-	int retval = 0;
-
-	return retval;
+int dequeue(struct Queue * que, unsigned int size){
+	int retval = que->arr[que->head++];
+	if (retval <= size){
+		return retval;
+	}
+	puts("Queue is empty, Nothing to return!");
 }
 
 void initializeQueue(struct Queue * que, unsigned int size){
