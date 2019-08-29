@@ -2,24 +2,34 @@
 #include <stdlib.h>
 
 struct Queue {
-	int arr[6] = {};
+	int arr[6];
 	int head;
 };
 
 //prototypes
 int dequeue(struct Queue * que);
 int enqueue(struct Queue * que, int element);
-void printQueue(struct queue que, unsigned int size);
+void printQueue(struct Queue que, unsigned int size);
 void initializeQueue(struct Queue * que, unsigned int size);
 
 
 int main(int argc, char argv[]){
-	struct Queue q = {{}, 5};
+	struct Queue q;
+	int length = sizeof(q.arr) / sizeof(int);
+	initializeQueue(&q, length);
 	return 0;
 }
 
 int enqueue(struct Queue * que, int element){
-
+	int retval = 0;
+	//first check if enqueue is possible...
+	if(que->head > 0){
+		que->arr[que->head] = element;
+		que->head--;
+	} else {
+		puts("enqueue failed, no space to insert item!");
+	}
+	return retval;
 }
 
 int dequeue(struct Queue * que){
@@ -27,11 +37,10 @@ int dequeue(struct Queue * que){
 }
 
 void initializeQueue(struct Queue * que, unsigned int size){
-	que->arr = {};
 	que->head = size - 1;
 }
 
-void printQueue(struct queue que, unsigned int size){
+void printQueue(struct Queue que, unsigned int size){
 	for (int i = que.head; i < size - 1; ++i){
 		printf("%d ", que.arr[i]);
 	}
