@@ -38,6 +38,7 @@ int enqueue(struct Queue * que, int element, unsigned int size){
 		swapLeft(que, size);
 		que->head--;
 		que->arr[size - 1] = element;
+		retval = 1;
 	} else {
 		puts("enqueue failed, no space to insert item!");
 	}
@@ -45,8 +46,9 @@ int enqueue(struct Queue * que, int element, unsigned int size){
 }
 
 int dequeue(struct Queue * que){
-	puts("body goes in here...");
-	return 1;
+	int retval = 0;
+
+	return retval;
 }
 
 void initializeQueue(struct Queue * que, unsigned int size){
