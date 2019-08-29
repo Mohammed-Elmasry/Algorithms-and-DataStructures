@@ -3,7 +3,7 @@
 
 struct queue {
 	int arr[6] = {};
-
+	int head;
 };
 
 //prototypes
