@@ -33,7 +33,7 @@ void initializeQueue(struct Queue * que, unsigned int size){
 
 void printQueue(struct queue que, unsigned int size){
 	for (int i = que.head; i < size - 1; ++i){
-		printf("%d <-->", que.arr[i]);
+		printf("%d ", que.arr[i]);
 	}
 	puts("display complete...");
 }
