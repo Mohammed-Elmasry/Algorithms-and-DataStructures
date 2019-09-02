@@ -4,7 +4,8 @@
 
 
 //prototypes
-void swap(int * array, unsigned int first, unsigned int second);
+void selectionSort(int * array, unsigned int size);
+void swapIndex(int * array, unsigned int first, unsigned int second);
 
 
 int main(int argc, char * argv[]){
@@ -27,6 +28,8 @@ void selectionSort(int * array, unsigned int size){
 	}
 }
 
-void swap(int * array, int size ,unsigned int first, unsigned int second){
-	
+void swapIndex(int * array, unsigned int first, unsigned int second){
+	int temp = array[second];
+	array[second] = array[first];
+	array[first] = temp;
 }
