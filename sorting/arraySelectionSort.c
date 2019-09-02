@@ -4,13 +4,14 @@
 
 
 //prototypes
+void printArray(int * array, unsigned int size);
 void selectionSort(int * array, unsigned int size);
 void swapIndex(int * array, unsigned int first, unsigned int second);
 
 
 int main(int argc, char * argv[]){
 	int arr[SIZE] = {1,2,3,4};
-	swap(arr, 0, 3)
+	swap(arr, 0, 3);
 	return 0;
 }
 
@@ -32,4 +33,11 @@ void swapIndex(int * array, unsigned int first, unsigned int second){
 	int temp = array[second];
 	array[second] = array[first];
 	array[first] = temp;
+}
+
+void printArray(int * array, unsigned int size){
+	for (int i =0; i < size; ++i){
+		printf("%d\n", array[i]);
+	}
+	puts("display complete...");
 }
