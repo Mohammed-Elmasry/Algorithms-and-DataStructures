@@ -10,29 +10,25 @@ void swapIndex(int * array, unsigned int first, unsigned int second);
 
 
 int main(int argc, char * argv[]){
-	int arr[SIZE] = {1,2,3,4};
-	puts("before swap");
+	int arr[SIZE] = {1,3,2,4};
+	puts("before sorting");
 	printArray(arr, SIZE);
-	swapIndex(arr, 0, 3);
-	puts("after swap");
+	selectionSort(arr, SIZE);
+	puts("after sorting");
 	printArray(arr, SIZE);
 	return 0;
 }
 
 void selectionSort(int * array, unsigned int size){
-	int limit = 0;
-	int max = 0;
-	int last = 0;
-	for (int i = 0; i < size - limit; i++){
-		max = array[i];
-		for(int j = i + 1; j < size - limit; j++){
-			if(array[max] < array[j]){
-				max = j;
-				last = j;
+	int min = 0;
+	for (int i = 0; i < size; ++i){
+		min = i;
+		for(int j = i + 1; j < size; ++j){
+			if(array[j] < array[min]){
+				min = j;
 			}
 		}
-		swapIndex(array, max, last);
-		limit++;
+		swapIndex(array, i, min);
 	}
 }
 
