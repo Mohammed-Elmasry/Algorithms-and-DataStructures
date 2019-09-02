@@ -19,3 +19,10 @@ USING A REAL ARRAY INSIDE THE STRUCTURE WILL HINDER THE RESIZE AND REASSIGNMENT 
 if you need only 1 item in the first row and 2 items in the second row, you'll be wasting some memory allocated for the second place in row one for example
 
 a sparse array would only allocate an array to store entries to other arrays and each of the latter would hold a certain set of values. (the array would be fitting the specific size of the required values).
+
+------------------------------------ Algorithmic thinking -------------------------------------
+
+
+#1 in case you need to work with counts and counters in arrays, you could think of counting upwards and downwards (i.e. the array increases and decreases in size). This would be better than
+creating two different arrays. -> saves memory and time complexity.
+
