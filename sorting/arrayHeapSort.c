@@ -8,15 +8,23 @@ void insert(int * array, int element, int size);
 
 int main(int argc, char * argv[]){
 	int arr[8] = {15,22,3,18,4,8,77,9};
-	printf("parent of zero is %d\n", parent(0));
-	puts("before heapify...");
-	printArray(arr, 8);
-	
+	int array[8];
+
+	insert(array, 15, 8);
+	insert(array, 22, 8);
+	insert(array, 3, 8);
+	insert(array, 18, 8);
+	insert(array, 4, 8);
+	insert(array, 8, 8);
+	insert(array, 77, 8);
+	insert(array, 9, 8);
+
+	puts("heap made on insertion...");
+	printArray(array, 8);
+
+	puts("heap made from an array...");
 	heapify(arr, 8);
-
-	puts("after heapify...");
-	printArray(arr, 8);
-
+	printArray(arr,8);
 	return 0;
 }
 
@@ -53,27 +61,28 @@ void printArray(int * array, unsigned int size){
 	puts("display complete...");
 }
 
-// void heapify_once(int * array, int size){
-// 	int tempParent = 0;
-// 	for (int i = size - 1; i > 0; --i){
-// 		tempParent = parent(i);
-// 		while(i != 0){
-// 			if(array[tempParent] < array[i]){
-// 				swapIndex(array, parent(i), i);
-// 				i = tempParent;
-// 				tempParent = parent(i);
-// 			} else {
-// 				break;
-// 			}
-// 		}
-// 	}
-// }
-// 
+void heapify_once(int * array, int size){
+	int i = size;
+	int tempParent = parent(i);
+	while(i != 0){
+		if(array[tempParent] < array[i]){
+			swapIndex(array, parent(i), i);
+			i = tempParent;
+			tempParent = parent(i);
+		} else {
+			break;
+		}
+	}
+}
 
 void insert(int * array, int element, int size){
 	static int count = 0;
 	if(count < size){
 		array[count] = element;
+		//heapify logic...
+		heapify_once(array, count);
 		count++;
+	} else {
+		puts("array out of bound!");
 	}
 }
