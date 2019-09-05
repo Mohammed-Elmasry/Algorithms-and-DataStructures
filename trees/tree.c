@@ -3,11 +3,10 @@
 
 //prototypes
 
-
 struct node {
 	int data;
-	node * right;
-	node * left;
+	struct node * right;
+	struct node * left;
 };
 
 int main(int argc, char * argv[]){
