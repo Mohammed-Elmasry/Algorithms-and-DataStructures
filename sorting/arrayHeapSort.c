@@ -28,3 +28,10 @@ void swapIndex(int * array, unsigned int first, unsigned int second){
 	array[second] = array[first];
 	array[first] = temp;
 }
+
+void printArray(int * array, unsigned int size){
+	for (int i =0; i < size; ++i){
+		printf("%d\n", array[i]);
+	}
+	puts("display complete...");
+}
