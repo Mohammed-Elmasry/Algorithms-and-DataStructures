@@ -3,6 +3,8 @@
 //prototype
 int parent(int index);
 void heapify(int * array, int size);
+void insert(int * array, int element);
+
 
 int main(int argc, char * argv[]){
 	int arr[8] = {15,22,3,18,4,8,77,9};
@@ -49,4 +51,27 @@ void printArray(int * array, unsigned int size){
 		printf("%d\n", array[i]);
 	}
 	puts("display complete...");
+}
+
+// void heapify_once(int * array, int size){
+// 	int tempParent = 0;
+// 	for (int i = size - 1; i > 0; --i){
+// 		tempParent = parent(i);
+// 		while(i != 0){
+// 			if(array[tempParent] < array[i]){
+// 				swapIndex(array, parent(i), i);
+// 				i = tempParent;
+// 				tempParent = parent(i);
+// 			} else {
+// 				break;
+// 			}
+// 		}
+// 	}
+// }
+// 
+
+void insert(int * array, int element){
+	static int count = 0;
+	array[count] = element;
+	count++;
 }
