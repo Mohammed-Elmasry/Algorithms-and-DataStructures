@@ -3,7 +3,7 @@
 //prototype
 int parent(int index);
 void heapify(int * array, int size);
-void insert(int * array, int element);
+void insert(int * array, int element, int size);
 
 
 int main(int argc, char * argv[]){
@@ -70,8 +70,10 @@ void printArray(int * array, unsigned int size){
 // }
 // 
 
-void insert(int * array, int element){
+void insert(int * array, int element, int size){
 	static int count = 0;
-	array[count] = element;
-	count++;
+	if(count < size){
+		array[count] = element;
+		count++;
+	}
 }
