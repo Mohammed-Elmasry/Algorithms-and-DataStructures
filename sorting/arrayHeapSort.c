@@ -12,12 +12,12 @@ int main(int argc, char * argv[]){
 
 	insert(array, 15, 8);
 	insert(array, 22, 8);
-	insert(array, 3, 8);
+	insert(array,  3, 8);
 	insert(array, 18, 8);
-	insert(array, 4, 8);
-	insert(array, 8, 8);
+	insert(array,  4, 8);
+	insert(array,  8, 8);
 	insert(array, 77, 8);
-	insert(array, 9, 8);
+	insert(array,  9, 8);
 
 	puts("heap made on insertion...");
 	printArray(array, 8);
