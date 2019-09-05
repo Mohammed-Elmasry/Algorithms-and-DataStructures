@@ -1,10 +1,18 @@
 #include <stdio.h>
-
+#include "headers/arraySelectionSort.h"
 //prototype
 int parent(int index);
+void heapify(int * array, int size);
 
 int main(int argc, char * argv[]){
 	int arr[8] = {15,22,3,18,4,8,77,9};
+	puts("before heapify...");
+	printArray(arr, 8);
+	
+	heapify(arr, 8);
+
+	puts("after heapify...");
+	printArray(arr, 8);
 
 	return 0;
 }
@@ -12,8 +20,10 @@ int main(int argc, char * argv[]){
 void heapify(int * array, int size){
 	for (int i = size - 1; i > 0; --i){
 		while(i != 0){
-			if(parent(i) < array[i]){
-
+			int tempParent = parent(i);
+			if(tempParent < array[i]){
+				swapIndex(array, parent(i), i);
+				i = tempParent;
 			}
 		}
 	}
