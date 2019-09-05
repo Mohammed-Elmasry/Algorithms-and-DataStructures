@@ -6,6 +6,7 @@ void heapify(int * array, int size);
 
 int main(int argc, char * argv[]){
 	int arr[8] = {15,22,3,18,4,8,77,9};
+	printf("parent of zero is %d\n", parent(0));
 	puts("before heapify...");
 	printArray(arr, 8);
 	
@@ -18,12 +19,16 @@ int main(int argc, char * argv[]){
 }
 
 void heapify(int * array, int size){
+	int tempParent = 0;
 	for (int i = size - 1; i > 0; --i){
+		tempParent = parent(i);
 		while(i != 0){
-			int tempParent = parent(i);
-			if(tempParent < array[i]){
+			if(array[tempParent] < array[i]){
 				swapIndex(array, parent(i), i);
 				i = tempParent;
+				tempParent = parent(i);
+			} else {
+				break;
 			}
 		}
 	}
