@@ -54,10 +54,11 @@ void displayNode(struct node n){
 	printf("left child is %p\n", n.left);
 }
 
-void traverseTree(struct node * const root){
+void preOrderTraverseTree(struct node * const root){
 	if(root){
 		printf("%d\n", root->data);
 		traverseTree(root->left);
 		traverseTree(root->right);
 	}
 }
+
