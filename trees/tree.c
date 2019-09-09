@@ -11,8 +11,10 @@ struct node {
 
 //prototypes
 void displayNode(struct node n);
-void traverseTree(struct node * root);
 struct node * initializeNode(int data);
+void preOrderTraverseTree(struct node * root);
+void inOrderTraverseTree(struct node * const root);
+void postOrderTraverseTree(struct node * const root);
 
 int main(int argc, char * argv[]){
 	// struct node * ptr = initializeNode(4);
@@ -31,8 +33,14 @@ int main(int argc, char * argv[]){
 	n5->left    = n6;
 	n5->right   = n7;
 
-	traverseTree(root);
-
+	puts("preOrder...");
+	preOrderTraverseTree(root);
+	
+	puts("inOrder...");
+	inOrderTraverseTree(root);
+	
+	puts("postOrder...");
+	postOrderTraverseTree(root);
 	return 0;
 }
 
@@ -57,8 +65,23 @@ void displayNode(struct node n){
 void preOrderTraverseTree(struct node * const root){
 	if(root){
 		printf("%d\n", root->data);
-		traverseTree(root->left);
-		traverseTree(root->right);
+		preOrderTraverseTree(root->left);
+		preOrderTraverseTree(root->right);
 	}
 }
 
+void inOrderTraverseTree(struct node * const root){
+	if(root){
+		inOrderTraverseTree(root->left);
+		printf("%d\n", root->data);
+		inOrderTraverseTree(root->right);
+	}
+}
+
+void postOrderTraverseTree(struct node * const root){
+	if(root){
+		postOrderTraverseTree(root->left);
+		postOrderTraverseTree(root->right);
+		printf("%d\n", root->data);
+	}
+}
