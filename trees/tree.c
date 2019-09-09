@@ -16,21 +16,17 @@ void preOrderTraverseTree(struct node * root);
 void inOrderTraverseTree(struct node * const root);
 void postOrderTraverseTree(struct node * const root);
 int insertNode(struct node ** root, int value);
+int treeInsertNode(struct node ** root, int value);
 
 int main(int argc, char * argv[]){
 	// struct node * ptr = initializeNode(4);
 	struct node *root = NULL;
 
-	insertNode(&root, 5);
-	insertNode(&root, 4);
-	insertNode(&root, 6);
-	insertNode(&root, 22);
-	insertNode(&root, 2);
-	insertNode(&root, 7);
-	insertNode(&root, 3);
-	insertNode(&root, 8);
-	insertNode(&root, 9);
-
+	treeInsertNode(&root, 5);
+	treeInsertNode(&root, 4);
+	treeInsertNode(&root, 6);
+	treeInsertNode(&root, 22);
+ 	
 	puts("preOrder...");
 	preOrderTraverseTree(root);
 	
@@ -85,6 +81,7 @@ int insertNode(struct node ** root, int value){
 	return retval;
 }
 
+
 void preOrderTraverseTree(struct node * const root){
 	if(root){
 		printf("%d\n", root->data);
@@ -108,4 +105,31 @@ void postOrderTraverseTree(struct node * const root){
 		postOrderTraverseTree(root->right);
 		printf("%d\n", root->data);
 	}
+}
+
+
+int treeInsertNode(struct node ** root, int value){
+	int retval = 0;
+	//if there's no tree to begin with
+	if(*root == NULL){
+		*root = (struct node *)malloc(sizeof(struct node));
+		if(*root){
+			(*root)->data  = value;
+			(*root)->left  = NULL;
+			(*root)->right = NULL;
+			retval = 1;
+		} else {
+			printf("%s\n", strerror(ENOMEM));
+		}
+	} else {
+		if((*root)->left == NULL){
+			treeInsertNode(&((*root)->left), value);
+		}
+		else if((*root)->right == NULL){
+			treeInsertNode(&((*root)->right), value);
+		} else {
+			treeInsertNode(&((*root)->left), value);
+		}
+	}
+	return retval;
 }
