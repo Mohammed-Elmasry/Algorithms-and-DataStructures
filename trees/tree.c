@@ -76,6 +76,7 @@ void inOrderTraverseTree(struct node * const root){
 		printf("%d\n", root->data);
 		inOrderTraverseTree(root->right);
 	}
+
 }
 
 void postOrderTraverseTree(struct node * const root){
