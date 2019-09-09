@@ -11,14 +11,28 @@ struct node {
 
 //prototypes
 void displayNode(struct node n);
-void traverseTree(struct node root);
+void traverseTree(struct node * root);
 struct node * initializeNode(int data);
 
 int main(int argc, char * argv[]){
-	struct node * ptr = initializeNode(4);
-	struct node root = *initializeNode(7);
+	// struct node * ptr = initializeNode(4);
+	struct node *root = initializeNode(1);
+	struct node *n2   = initializeNode(2);
+	struct node *n3   = initializeNode(3);
+	struct node *n4   = initializeNode(4);
+	struct node *n5	  = initializeNode(5);
+	struct node *n6   = initializeNode(6);
+	struct node *n7   = initializeNode(7);
+
+	root->left  = n2;
+	root->right = n5;
+	n2->left    = n3;
+	n2->right   = n4;
+	n5->left    = n6;
+	n5->right   = n7;
+
 	traverseTree(root);
-	// displayNode(*ptr);
+
 	return 0;
 }
 
@@ -40,13 +54,10 @@ void displayNode(struct node n){
 	printf("left child is %p\n", n.left);
 }
 
-void traverseTree(struct node root){
-	printf("%d\n", root.data);
-	if(root.left){
-		traverseTree(*(root.left));
+void traverseTree(struct node * const root){
+	if(root){
+		printf("%d\n", root->data);
+		traverseTree(root->left);
+		traverseTree(root->right);
 	}
-	if(root.right){
-		traverseTree(*(root.right));
-	}
-
 }
