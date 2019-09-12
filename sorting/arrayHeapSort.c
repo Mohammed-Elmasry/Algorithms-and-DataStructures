@@ -137,7 +137,10 @@ int removeTopItem(struct intArrayList * arrayList, unsigned int size){
 	}
 	return retval;
 }
-
+/**
+ * [sort using heap sort algorithm]
+ * @param list [arrayList to be sorted]
+ */
 void heapSort(struct intArrayList * list){
 	for(int size = list->count - 1; size > 0; --size){
 		swapIndex(list->arrayPtr, 0, size);
