@@ -6,29 +6,34 @@
 int parent(int index);
 void heapify(int * array, int size);
 void insert(int * array, int element, int size);
-int removeTopItem(int * array, unsigned int size);
+int removeTopItem(struct intArrayList * arrayList, unsigned int size);
 
 
 int main(int argc, char * argv[]){
 
-	int arr[6] = {7,2,5,10,9,3};
-
-	// struct intArrayList list;
-	// assignIntList(&list, arr, 6,6);
+	// int arr[6] = {7,2,5,10,9,3};
+	int arr[7] = {2,5,9,7,10,3,8};
+	struct intArrayList list;
+	assignIntList(&list, arr, 7,7);
 	puts("before anything...");
-	// printArrayList(list);
-	printArray(arr, 6);
+	printArrayList(list);
 	puts("\n\n\n");
 
 	puts("after heapify....");
-	heapify(arr, 6);
-	printArray(arr, 6);
-	// puts("after removal of top item...");
-	// removeTopItem(list, 6);
-	// printArrayList(list,6);
+	heapify(list.arrayPtr, 7);
+	printArrayList(list);
+
+	puts("\n\n\nafter removal of top item...");
+	removeTopItem(&list, 7);
+	// printf("%d\n", pop(&list));
+	printArrayListElements(list);
 	return 0;
 }
-
+/**
+ * [heapify a given array (create a max heap out of it)]
+ * @param array [array to heapify]
+ * @param size  [size of array]
+ */
 void heapify(int * array, int size){
 	int tempParent = 0;
 	int old_i = 0;
@@ -48,16 +53,32 @@ void heapify(int * array, int size){
 	}
 }
 
+/**
+ * [returns the parent index of a given index]
+ * @param  index [index of which parent is requested]
+ * @return       [integer denoting parent requested]
+ */
 int parent(int index){
 	return (index-1)/2;
 }
 
+/**
+ * [swap 2 indexes of an array together]
+ * @param array  [array with indexes to be swapped]
+ * @param first  [first index arg]
+ * @param second [second index arg]
+ */
 void swapIndex(int * array, unsigned int first, unsigned int second){
 	int temp = array[second];
 	array[second] = array[first];
 	array[first] = temp;
 }
 
+/**
+ * [prints out the array elements]
+ * @param array [array to be printed]
+ * @param size  [size of array]
+ */
 void printArray(int * array, unsigned int size){
 	for (int i =0; i < size; ++i){
 		printf("%d\n", array[i]);
@@ -65,6 +86,11 @@ void printArray(int * array, unsigned int size){
 	puts("display complete...");
 }
 
+/**
+ * [heapify the tree starting from the last element and then stop]
+ * @param array [array to heapify]
+ * @param size  [size of array]
+ */
 void heapify_once(int * array, int size){
 	int i = size;
 	int tempParent = parent(i);
@@ -79,6 +105,12 @@ void heapify_once(int * array, int size){
 	}
 }
 
+/**
+ * [inserts an element into an array with heapify_once in action]
+ * @param array   [array to insert element into]
+ * @param element [element to be inserted]
+ * @param size    [size of the array]
+ */
 void insert(int * array, int element, int size){
 	static int count = 0;
 	if(count < size){
@@ -91,13 +123,19 @@ void insert(int * array, int element, int size){
 	}
 }
 
-int removeTopItem(int * array, unsigned int size){
+/**
+ * [removes top item from the given arrayList]
+ * @param  arrayList [pointer to intArrayList structure]
+ * @param  size      [size of the given arrayList]
+ * @return           [the top item]
+ */
+int removeTopItem(struct intArrayList * arrayList, unsigned int size){
 	int retval = -1;
-	if(array){ //there is a tree to begin with
-		retval = array[0];
-		array[0] = array[size - 1];	
-		heapify(array, size);
-		array[size-1] = -1; 
+	if(arrayList->arrayPtr){ //there is a tree to begin with
+		retval = arrayList->arrayPtr[0];
+		removeFromArrayList(arrayList,0);		
+		insertIntoArrayList(arrayList, 0, pop(arrayList));
+		heapify(arrayList->arrayPtr, size);
 	}
 	return retval;
 }
