@@ -7,6 +7,7 @@ int parent(int index);
 void heapify(int * array, int size);
 void insert(int * array, int element, int size);
 int removeTopItem(struct intArrayList * arrayList, unsigned int size);
+void heapSort(struct intArrayList * list);
 
 
 int main(int argc, char * argv[]){
@@ -19,13 +20,10 @@ int main(int argc, char * argv[]){
 	printArrayList(list);
 	puts("\n\n\n");
 
-	puts("after heapify....");
 	heapify(list.arrayPtr, 7);
-	printArrayList(list);
 
-	puts("\n\n\nafter removal of top item...");
-	removeTopItem(&list, 7);
-	// printf("%d\n", pop(&list));
+	heapSort(&list);
+	puts("after heap sorting...");
 	printArrayListElements(list);
 	return 0;
 }
@@ -138,4 +136,12 @@ int removeTopItem(struct intArrayList * arrayList, unsigned int size){
 		heapify(arrayList->arrayPtr, size);
 	}
 	return retval;
+}
+
+void heapSort(struct intArrayList * list){
+	for(int size = list->count - 1; size > 0; --size){
+		swapIndex(list->arrayPtr, 0, size);
+		heapify(list->arrayPtr, size);
+	}
+
 }
