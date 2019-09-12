@@ -2,10 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// struct arrayList{
-// 	int * array;
-// }typedef ArrayList;
-
 // prototypes
 void printList(int list[], long unsigned int size);
 int length(int array[], long unsigned int size);
@@ -28,7 +24,8 @@ int main(void){
 	// puts("display complete...");
 	return 0;
 }
-
+/** adds a new element to the arrayList
+    returns an integer denoting success or failure of insertion operation*/
 int * expandByOne(int array[], long unsigned int size, int element){
 	int length = size / sizeof(int);
 	int * ptr = (int *) malloc(size + sizeof(int));
@@ -37,19 +34,20 @@ int * expandByOne(int array[], long unsigned int size, int element){
 	ptr[length] = element;
 	return ptr;
 }
-
+/** prints a display of the given array based on provided size in integer */
 void printList(int list[], long unsigned int size){
 	for(int i = 0; i < size; ++i){
 		printf("%d\n", list[i]);
 	}
 }
-
+/** returns the length of a given array based on its size in bits */
 int length(int array[], long unsigned int size){
 	int result = size / sizeof(int);
 	printf("result is %d\n", result);
 	return result;
 }
-
+/** [removes a certain element at the given index and handles the size of resulting array]
+	[returns a pointer to the newly created structure] */
 int * reduceByOne(int array[], long unsigned int size, int index){
 	
 	int * newArray = (int *)malloc(size - sizeof(int));
