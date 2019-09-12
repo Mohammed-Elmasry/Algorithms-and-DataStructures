@@ -4,27 +4,20 @@
 int parent(int index);
 void heapify(int * array, int size);
 void insert(int * array, int element, int size);
+int removeTopItem(int * array, unsigned int size);
 
 
 int main(int argc, char * argv[]){
-	int arr[8] = {15,22,3,18,4,8,77,9};
-	int array[8];
+	int arr[6] = {10,7,9,2,5,3};
+	puts("before anything...");
+	printArray(arr,6);
 
-	insert(array, 15, 8);
-	insert(array, 22, 8);
-	insert(array,  3, 8);
-	insert(array, 18, 8);
-	insert(array,  4, 8);
-	insert(array,  8, 8);
-	insert(array, 77, 8);
-	insert(array,  9, 8);
+	puts("\n\n\n");
 
-	puts("heap made on insertion...");
-	printArray(array, 8);
 
-	puts("heap made from an array...");
-	heapify(arr, 8);
-	printArray(arr,8);
+	puts("after removal of top item...");
+	removeTopItem(arr, 6);
+	printArray(arr,6);
 	return 0;
 }
 
@@ -85,4 +78,15 @@ void insert(int * array, int element, int size){
 	} else {
 		puts("array out of bound!");
 	}
+}
+
+int removeTopItem(int * array, unsigned int size){
+	int retval = -1;
+	if(array){ //there is a tree to begin with
+		retval = array[0];
+		array[0] = array[size - 1];	
+		heapify(array, size);
+		array[size-1] = -1;
+	}
+	return retval;
 }
