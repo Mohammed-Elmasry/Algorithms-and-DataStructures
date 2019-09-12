@@ -2,28 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+struct arrayList{
+	int * array;
+}typedef ArrayList;
+
 // prototypes
 void printList(int list[], long unsigned int size);
 int length(int array[], long unsigned int size);
 int * expandByOne(int array[], long unsigned int size, int element);
 int * reduceByOne(int array[], long unsigned int size, int index);
 
-int main(void){
-	int array[] = {1,2,4,6,2};
-	// length(array, sizeof(array));
-	
-	int * newArray;
-	newArray = array;
-	printf("%lu\n", sizeof(*newArray));
-	// newArray = reduceByOne(array, sizeof(array), 3);
-	// newArray = expandByOne(array, sizeof(array), 19);
-	// printf("size is %lu\n",sizeof(newArray));
-	// for (int i = 0; i < 4; ++i){
-		// printf("element number %d is %d\n", i+1, newArray[i]);
-	// }
-	// puts("display complete...");
-	return 0;
-}
 /** adds a new element to the arrayList
     returns an integer denoting success or failure of insertion operation*/
 int * expandByOne(int array[], long unsigned int size, int element){

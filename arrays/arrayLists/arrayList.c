@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-// struct arrayList{
-// 	int * array;
-// }typedef ArrayList;
+struct arrayList{
+	int * array;
+}typedef ArrayList;
 
 // prototypes
 void printList(int list[], long unsigned int size);

@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "headers/arraySelectionSort.h"
+#include "headers/arrayList.h"
+
 //prototype
 int parent(int index);
 void heapify(int * array, int size);
@@ -10,14 +12,14 @@ int removeTopItem(int * array, unsigned int size);
 int main(int argc, char * argv[]){
 	int arr[6] = {10,7,9,2,5,3};
 	puts("before anything...");
-	printArray(arr,6);
+	printList(arr,6);
 
 	puts("\n\n\n");
 
 
 	puts("after removal of top item...");
 	removeTopItem(arr, 6);
-	printArray(arr,6);
+	printList(arr,6);
 	return 0;
 }
 
@@ -86,7 +88,7 @@ int removeTopItem(int * array, unsigned int size){
 		retval = array[0];
 		array[0] = array[size - 1];	
 		heapify(array, size);
-		array[size-1] = -1;
+		array[size-1] = -1; 
 	}
 	return retval;
 }
