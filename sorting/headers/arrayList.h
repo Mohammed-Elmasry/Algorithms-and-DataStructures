@@ -1,3 +1,7 @@
+//structures
+#include "structs/arrayList.c"
+
+
 //arraylist prototypes
 int assignIntList(struct intArrayList * list, int * array, int arraySize, int arrayElementCount);
 void printArrayList(struct intArrayList list);

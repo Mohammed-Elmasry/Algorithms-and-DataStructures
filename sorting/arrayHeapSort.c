@@ -10,22 +10,30 @@ int removeTopItem(int * array, unsigned int size);
 
 
 int main(int argc, char * argv[]){
-	int arr[6] = {10,7,9,2,5,3};
-	puts("before anything...");
-	printList(arr,6);
 
+	int arr[6] = {7,2,5,10,9,3};
+
+	// struct intArrayList list;
+	// assignIntList(&list, arr, 6,6);
+	puts("before anything...");
+	// printArrayList(list);
+	printArray(arr, 6);
 	puts("\n\n\n");
 
-
-	puts("after removal of top item...");
-	removeTopItem(arr, 6);
-	printList(arr,6);
+	puts("after heapify....");
+	heapify(arr, 6);
+	printArray(arr, 6);
+	// puts("after removal of top item...");
+	// removeTopItem(list, 6);
+	// printArrayList(list,6);
 	return 0;
 }
 
 void heapify(int * array, int size){
 	int tempParent = 0;
+	int old_i = 0;
 	for (int i = size - 1; i > 0; --i){
+		old_i = i;
 		tempParent = parent(i);
 		while(i != 0){
 			if(array[tempParent] < array[i]){
@@ -36,6 +44,7 @@ void heapify(int * array, int size){
 				break;
 			}
 		}
+		i = old_i;
 	}
 }
 
