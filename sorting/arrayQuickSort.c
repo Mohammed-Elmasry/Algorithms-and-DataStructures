@@ -29,6 +29,13 @@ int main(int argc, char * argv[]){
 	return 0;
 }
 
+/**
+ * [put elements smaller than pivot before it and those bigger than pivot after it]
+ * @param  list  [arrayList to be partitioned]
+ * @param  start [index to start partitioning at]
+ * @param  end   [index to stop partitioning at]
+ * @return       [the index of the pivot]
+ */
 int partition(struct intArrayList * list, int start, int end){
 	int pivot = list->arrayPtr[end];
 	int i = start - 1, j = start;
@@ -44,6 +51,12 @@ int partition(struct intArrayList * list, int start, int end){
 	return i;
 }
 
+/**
+ * [quickSort an array]
+ * @param list  [arrayList to be sorted]
+ * @param start [index to start sorting at]
+ * @param end   [index to stop sorting at]
+ */
 void quickSort(struct intArrayList * list, int start, int end){
 	if(start < end){
 		int middle = partition(list, start, end);
@@ -51,9 +64,3 @@ void quickSort(struct intArrayList * list, int start, int end){
 		quickSort(list, middle + 1, end);
 	}	
 }
-
-// void swapIndex(struct intArrayList * list, unsigned int index1, unsigned int index2){
-// 	int temp = index1;
-// 	list->arrayPtr[index1] = list->arrayPtr[index2];
-// 	list->arrayPtr[index2] = list->arrayPtr[temp];
-// }
