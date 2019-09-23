@@ -5,8 +5,11 @@
 //prototypes
 
 int main(int argc, char * argv[]){
-	int arr[10] = {};
+	int arr[10];
 	printArray(arr, 10);
+	initializeHash(arr, 10);
+	printArray(arr, 10);
+
 	return 0;
 }
 /**
@@ -40,6 +43,8 @@ void printArray(int * array, int size){
 	puts("display complete..");
 }
 
-void initializeHash(int * array){
-	array = {};
+void initializeHash(int * array, int size){
+	for (int i = 0; i < size; ++i){
+		array[i] = 0;
+	}
 }
