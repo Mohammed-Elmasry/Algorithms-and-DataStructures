@@ -39,3 +39,7 @@ void printArray(int * array, int size){
 	}
 	puts("display complete..");
 }
+
+void initializeHash(int * array){
+	array = {};
+}
