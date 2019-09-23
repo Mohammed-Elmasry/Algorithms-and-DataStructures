@@ -41,10 +41,10 @@ int delete(struct node** head, int key){
 	return retval;
 }
 
-struct node * find(struct node* head, char value){
+struct node * find(struct node* head, int key){
 	struct node* ptr = head;
 	while(ptr != NULL){
-		if(ptr->data == value){
+		if(ptr->key == key){
 			return ptr;
 		}
 		ptr = ptr->pNext;
