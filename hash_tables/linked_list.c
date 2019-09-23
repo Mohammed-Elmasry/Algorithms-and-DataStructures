@@ -12,7 +12,7 @@ void printList(struct node* head){
 	printf("\n");
 }
 
-int delete(struct node** head, char value){
+int delete(struct node** head, int key){
 	int retval = 0;
 	struct node* temp;
 	struct node* ptrPrev = NULL;
@@ -20,7 +20,7 @@ int delete(struct node** head, char value){
 		printf("List is Empty!\n");
 	} else {
 		temp = *head;
-		while(temp != NULL && temp->data != value){
+		while(temp != NULL && temp->key != key){
 			puts("loop access#");
 			ptrPrev = temp;
 			temp = temp->pNext;
@@ -35,7 +35,7 @@ int delete(struct node** head, char value){
 			free(temp);
 			retval = 1;
 		} else {
-			printf("Deletion failed, character %c not found!\n", value);
+			printf("Deletion failed, key %c not found!\n", key);
 		}
 	}
 	return retval;
