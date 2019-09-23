@@ -50,7 +50,7 @@ int insertPair(int * array, int value, int size){
 	
 }
 
-void printArray(int * array, int size){
+void printArray(struct node * array, int size){
 	for (int i = 0; i < size; ++i){
 		printf("%p\n", array[i]);
 	}
