@@ -57,6 +57,7 @@ int orderedInsert(struct node ** head, int key, char * value){
 	struct node * ptrNew = (struct node *)malloc(sizeof(struct node));
 	if(ptrNew){
 		ptrNew->key = key;
+		ptrNew->val = value;
 	 	ptrNew->pNext = NULL;
 		struct node* ptrPrev = NULL;
 		struct node* ptrCurrent = *head; //pointing to first node
