@@ -5,7 +5,7 @@
 //prototypes
 
 int main(int argc, char * argv[]){
-	int arr[10];
+	struct node * arr[10];
 	puts("before initializeHash...");
 	printArray(arr, 10);
 	puts("\n\n\n");

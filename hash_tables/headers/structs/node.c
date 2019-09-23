@@ -1,4 +1,5 @@
 struct node {
-	char data;
+	char * key;
+	char * val;
 	struct node * pNext;
 };
