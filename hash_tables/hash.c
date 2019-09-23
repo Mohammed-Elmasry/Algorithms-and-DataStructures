@@ -14,4 +14,5 @@ int hash(unsigned int input, int len){
 	int retval = 0;
 	retval = input % len;
 	return retval;
+	
 }
