@@ -6,11 +6,13 @@
 
 int main(int argc, char * argv[]){
 	struct node * arr[10];
-	puts("before initializeHash...");
+	initializeHash(arr, 10);
+	insertPair(arr, 6132654, "Name", 10);
+	puts("before delete...");
 	printArray(arr, 10);
 	puts("\n\n\n");
-	puts("after initializeHash...");
-	initializeHash(arr, 10);
+	puts("after delete...");
+	delete(&arr[4], 6132654);
 	printArray(arr, 10);
 
 	return 0;
@@ -34,17 +36,19 @@ int hash(unsigned int input, int len){
  * @param  size  [size to hash unto]
  * @return       [integer denoting result of insertion process]
  */
-int insertPair(int * array, int value, int size){
+int insertPair(struct node * array[], int key, char * value, int size){
 	int retval = 0;
-	int key = hash(value, size);
-	if(array[key] == 0){
- 		struct node * temp = allocateNode(value);
+	int bucket = hash(key, size);
+	if(array[bucket] == NULL){
+ 		struct node * temp = allocateNode(key, value);
 		if(temp){
-			array[key] = *temp;
+			temp->key = key;
+			temp->val = value;
+			array[bucket] = temp;
 			retval = 1;
 		}
 	} else {
-		append(&(array[key].pNext), value);	
+		orderedInsert(&(array[bucket]->pNext), key, value);	
 	}
 	return retval;
 	

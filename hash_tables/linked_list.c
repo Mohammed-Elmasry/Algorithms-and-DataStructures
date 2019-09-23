@@ -1,14 +1,15 @@
 #include <stdio.h>
+#include <errno.h>
 #include <stdlib.h>
 #include <string.h>
 #include "headers/linked_lists.h"
 
 void printList(struct node* head){
 	while(head != NULL){
-		printf("%d --> ", head->data);
+		printf("%d --> %s\n", head->key, head->val);
 		head = head->pNext;
 	}
-	printf(" NULL");
+	printf("Finished");
 	printf("\n");
 }
 
@@ -61,7 +62,7 @@ int orderedInsert(struct node ** head, int key, char * value){
 	 	ptrNew->pNext = NULL;
 		struct node* ptrPrev = NULL;
 		struct node* ptrCurrent = *head; //pointing to first node
-		while(ptrCurrent != NULL && ptrCurrent->data < value){
+		while(ptrCurrent != NULL && ptrCurrent->key < key){
 			ptrPrev = ptrCurrent;
 			ptrCurrent = ptrCurrent->pNext;
 		}
