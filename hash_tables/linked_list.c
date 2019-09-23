@@ -81,7 +81,7 @@ int orderedInsert(struct node ** head, int key, char * value){
 }
 
 
-struct node * allocateNode(int value){
+struct node * allocateNode(int key, char * value){
 	struct node * ptr = (struct node *)malloc(sizeof(struct node));
 	if(ptr){
 		return ptr;
