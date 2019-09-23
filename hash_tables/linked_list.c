@@ -441,3 +441,12 @@ struct node * isIntersected(struct node * head1, struct node * head2){
 	}
 	return NULL;
 }
+
+struct node * allcateNode(int value){
+	struct node * ptr = (struct node *)malloc(sizeof(struct node));
+	if(ptr){
+		return ptr;
+	} else {
+		return NULL;
+	}
+}

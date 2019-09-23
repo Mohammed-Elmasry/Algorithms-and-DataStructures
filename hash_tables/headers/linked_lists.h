@@ -24,3 +24,4 @@ int pop(struct node** top);
 int push(struct node** top, int value);
 void printStack(struct node* top);
 struct node * isIntersected(struct node * head1, struct node * head2);
+struct node * allcateNode(int value);

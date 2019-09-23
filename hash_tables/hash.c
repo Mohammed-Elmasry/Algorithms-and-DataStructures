@@ -6,7 +6,10 @@
 
 int main(int argc, char * argv[]){
 	int arr[10];
+	puts("before initializeHash...");
 	printArray(arr, 10);
+	puts("\n\n\n");
+	puts("after initializeHash...");
 	initializeHash(arr, 10);
 	printArray(arr, 10);
 
@@ -31,10 +34,15 @@ int hash(unsigned int input, int len){
  * @param  size  [size to hash unto]
  * @return       [integer denoting result of insertion process]
  */
-// int insertPair(int * array, int value, int size){
-// 	int key = hash(value, size);
-// 	if(array[key])
-// }
+int insertPair(int * array, int value, int size){
+	int key = hash(value, size);
+	if(array[key] == 0){ // slot is empty
+
+		
+	} else {
+
+	}
+}
 
 void printArray(int * array, int size){
 	for (int i = 0; i < size; ++i){
