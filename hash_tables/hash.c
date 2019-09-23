@@ -52,7 +52,7 @@ int insertPair(int * array, int value, int size){
 
 void printArray(int * array, int size){
 	for (int i = 0; i < size; ++i){
-		printf("%d\n", array[i]);
+		printf("%p\n", array[i]);
 	}
 	puts("display complete..");
 }
