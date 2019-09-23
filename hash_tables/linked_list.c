@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "headers/linked_lists.h"
 
 int append(struct node** head, char value){
@@ -447,6 +448,7 @@ struct node * allocateNode(int value){
 	if(ptr){
 		return ptr;
 	} else {
+		strerror(errno);
 		return NULL;
 	}
 }
