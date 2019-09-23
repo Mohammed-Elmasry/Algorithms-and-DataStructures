@@ -52,11 +52,11 @@ struct node * find(struct node* head, int key){
 	return ptr;	
 }
 
-int orderedInsert(struct node ** head, char value){
+int orderedInsert(struct node ** head, int key, char * value){
 	int retval = 0;
 	struct node * ptrNew = (struct node *)malloc(sizeof(struct node));
 	if(ptrNew){
-		ptrNew->data = value;
+		ptrNew->key = key;
 	 	ptrNew->pNext = NULL;
 		struct node* ptrPrev = NULL;
 		struct node* ptrCurrent = *head; //pointing to first node
@@ -73,7 +73,7 @@ int orderedInsert(struct node ** head, char value){
 		}
 		retval = 1;
 	} else {
-		printf("%c not inserted, memory allocation failed", value);
+		printf("pair not inserted, memory allocation failed");
 	}
 
 	return retval;
