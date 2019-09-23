@@ -35,13 +35,19 @@ int hash(unsigned int input, int len){
  * @return       [integer denoting result of insertion process]
  */
 int insertPair(int * array, int value, int size){
+	int retval = 0;
 	int key = hash(value, size);
-	if(array[key] == 0){ // slot is empty
-
-		
+	if(array[key] == 0){
+ 		struct node * temp = allocateNode(value);
+		if(temp){
+			array[key] = *temp;
+			retval = 1;
+		}
 	} else {
-
+		append(&(array[key].pNext), value);	
 	}
+	return retval;
+	
 }
 
 void printArray(int * array, int size){
