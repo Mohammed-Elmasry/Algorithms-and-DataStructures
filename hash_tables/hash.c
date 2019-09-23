@@ -5,7 +5,8 @@
 //prototypes
 
 int main(int argc, char * argv[]){
-
+	int result = hash(13513254, 7);
+	printf("%d\n", result);
 	return 0;
 }
 
