@@ -1,0 +1,13 @@
+implementation steps:
+
+1 - define the node structure (key, value, pNext); (DONE)
+2 - hash function(number, limit=sizeof(array)) => number/index (DONE).
+3 - collision resolution policy (chaining method).
+
+functions:
+create a node.
+insert(sorted) (overrides pre-existing keys)
+find node
+delete node
+
+12: foo, 13: bar
