@@ -4,6 +4,9 @@
 int main(int argc, char * argv[]){
 	int arr[10];
 	printArray(arr, 10); 
+
+	initializeArray(arr);
+	printArray(arr, 10); 
 	return 0;
 }
 
