@@ -28,3 +28,6 @@ void initializeArray(int * array, int size){
 	printf("array initialized successfully!\n");
 }
 
+void printNode(struct node n){
+	printf("key is %d and value is %s\n", n.key, n.val);
+}
