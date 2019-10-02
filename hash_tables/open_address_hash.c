@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "helpers/helper_headers.h"
+#include "headers/structs/node.c"
 
 int main(int argc, char * argv[]){
 	int arr[100];
