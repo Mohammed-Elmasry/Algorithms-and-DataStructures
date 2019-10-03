@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "helpers/helper_headers.h"
-#include "headers/structs/node.c"
+// #include "headers/structs/node.c"
 
 int main(int argc, char * argv[]){
 	int arr[100];
@@ -15,7 +15,8 @@ int main(int argc, char * argv[]){
 	initializeArray(arr, 10);
 	printArray(arr, 10); 
 	
-
+	struct node n;
+	printNode(n);
 	return 0;
 }
 

@@ -1,6 +1,6 @@
+// #include "../headers/structs/node.c"
 #include <stdio.h>
 #include "helper_headers.h"
-#include "../headers/structs/node.c"
 
 // system-wide constants definitions
 const int EMP = -2147483648;
