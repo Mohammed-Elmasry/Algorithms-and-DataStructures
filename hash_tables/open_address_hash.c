@@ -1,16 +1,14 @@
 #include <stdio.h>
+#include <math.h>
 #include <stdlib.h>
 #include "helpers/helper_headers.h"
-// #include "headers/structs/node.c"
+// #include "helpers/constants.c"
 
 int main(int argc, char * argv[]){
 	int arr[100];
 	puts("before initialization");
 	printArray(arr, 10);
-
-	int random = rand() % (10 + 1 - 0) + 0;
 	
-	printf("Random number is: %d\n", random);
 	puts("\n\n\n\nafter initialization");
 	initializeArray(arr, 10);
 	printArray(arr, 10); 
@@ -29,8 +27,8 @@ int insert(int * array, int item, int size){
 	int add = 1;
 	int pos = hash(item, size);
 
-	while(array[pos+pow(add,2)] != EMP){
+	while(array[pos + (int)pow(add,2)] != EMP && pos + (int)pow(add,2) <= size){
 		add++;	
 	}
-	array[pos+pow(add,2)] = item;
+	array[pos + (int)pow(add,2)] = item;
 }

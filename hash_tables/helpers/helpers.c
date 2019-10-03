@@ -1,10 +1,9 @@
 // #include "../headers/structs/node.c"
 #include <stdio.h>
 #include "helper_headers.h"
-
+#include "constants.c"
 // system-wide constants definitions
-const int EMP = -2147483648;
-const int DEL = -2147483647;
+
 /**
  * [printArray print array]
  * @param array [array to print]
