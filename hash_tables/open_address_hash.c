@@ -15,8 +15,7 @@ int main(int argc, char * argv[]){
 	initializeArray(arr, 10);
 	printArray(arr, 10); 
 	
-	struct node n;
-	printNode(n);
+	
 	return 0;
 }
 
@@ -26,6 +25,12 @@ int hash(int key, int size){
 	return key % size;
 }
 
-// int insert(int * array, int item, int size){
+int insert(int * array, int item, int size){
+	int add = 1;
+	int pos = hash(item, size);
 
-// }
+	while(array[pos+pow(add,2)] != EMP){
+		add++;	
+	}
+	array[pos+pow(add,2)] = item;
+}
