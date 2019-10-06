@@ -4,11 +4,16 @@
 //prototypes
 int fibonacci(int start);
 int factorial(int start);
+int factorial_nonrecursive(int start);
 
 int main(int argc, char * argv[]){
-	int result = fibonacci(5);
-	
-	printf("your result is %d\n", result);
+	int result = factorial_nonrecursive(5);
+	int result2 = factorial(5);
+	if(result2 == result){
+		printf("same!\n");
+	} else {
+		printf("different\n");
+	}
 	return 0;
 }
 
@@ -32,4 +37,13 @@ int fibonacci(int start){
 	} else {
 		return (fibonacci(start - 1) + fibonacci(start - 2));
 	}
+}
+
+int factorial_nonrecursive(int start){
+	int retval = 1;
+	while(start > 0){
+		retval = retval * start;
+		start--;
+	}
+	return retval;
 }
