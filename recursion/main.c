@@ -9,9 +9,9 @@ int sum(int array[], int size);
 int sum_recursive(int array[], int size, int i);
 
 int main(int argc, char * argv[]){
-	int array[5] = {1,2,3,4,5};
+	// int array[5] = {1,2,3,4,5};
 	// int result = sum(array, 5);
-	int result = sum_recursive(array, 5, 0);
+	int result = factorial(9);
 
 	printf("result is %d\n", result);
 	// int result = factorial_nonrecursive(5);
